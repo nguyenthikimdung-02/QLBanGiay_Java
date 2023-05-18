@@ -150,7 +150,7 @@ public class Login extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         getContentPane().add(jPanel2, gridBagConstraints);
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/image_login_Giay.jpg"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/image_login_Giay.jpg"))); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
