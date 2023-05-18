@@ -19,7 +19,8 @@ public class Giay {
     private Blob imageBlob ;
     public Giay()
     {
-        
+        //test github
+
     }
     public Giay(String ma, String ten, float gia, int slton, String sx, Blob image)
     {
