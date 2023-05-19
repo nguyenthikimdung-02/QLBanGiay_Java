@@ -29,4 +29,21 @@ public class ExecuteData {
         return DataAccess.ResultOfExecuteSqlUpdate(temp);
     }
     //</editor-fold> 
+    // <editor-fold defaultstate="collapsed" desc="NCC"> 
+    public static boolean insertNCC(Giay giay)
+    {
+        String temp = String.format("Insert into USER1.NCC (MANCC,TENNCC) values ('%s','%s')",giay.getMaGiay(),giay.getTenGiay());
+        return DataAccess.ResultOfExecuteSqlUpdate(temp);
+    }
+    public static boolean updateNCC(Giay giay)
+    {
+        String temp = String.format("Update USER1.NCC set MANCC = '%s', TENNCC = '%s' where MANCC = '%s'",giay.getMaGiay(),giay.getTenGiay(),giay.getMaGiay());
+        return DataAccess.ResultOfExecuteSqlUpdate(temp);
+    }
+    public static boolean deleteNCC(Giay giay)
+    {
+        String temp = String.format("delete from USER1.NCC where MANCC = '%s'",giay.getMaGiay());
+        return DataAccess.ResultOfExecuteSqlUpdate(temp);
+    }
+    //</editor-fold> 
 }
