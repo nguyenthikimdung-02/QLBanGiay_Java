@@ -12,7 +12,7 @@ import java.sql.DriverManager;
  * @author NGUYEN THI KIM DUNG
  */
 public class DataConnect {
-    public static String dbURL = "jdbc:oracle:thin:@localhost:1521:orcl";
+    public static String dbURL = "jdbc:oracle:thin:@localhost:1521:QLBANGIAY";
     public static String username;
     public static String password;
     public static Connection Connect = null;

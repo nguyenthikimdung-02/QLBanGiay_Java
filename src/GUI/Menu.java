@@ -16,10 +16,12 @@ public class Menu extends javax.swing.JFrame {
     /**
      * Creates new form Menu
      */
+    public String user;
     public static Connection conn = null; 
     public static Login loginForm = null;
     public Menu(String user) {
         initComponents();
+        this.user=user;
         this.setLocationRelativeTo(null);
         textUserName.setText(user);
     }
@@ -223,7 +225,8 @@ public class Menu extends javax.swing.JFrame {
 
     private void btn_CustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CustomerActionPerformed
         // TODO add your handling code here:
-        
+        this.setVisible(false);
+        new Customer_Management(user).setVisible(true);
     }//GEN-LAST:event_btn_CustomerActionPerformed
 
     private void btn_BillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BillActionPerformed

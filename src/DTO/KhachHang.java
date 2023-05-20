@@ -14,12 +14,12 @@ public class KhachHang {
     private String makh;
     private String tenkh;
     private String diachi;
-    private Date ngaysinh;
+    private String ngaysinh;
     public KhachHang()
     {
 
     }
-    public KhachHang(String makh, String tenkh, String diachi, Date ngaysinh)
+    public KhachHang(String makh, String tenkh, String diachi, String ngaysinh)
     {
         this.makh = makh;
         this.tenkh = tenkh;
@@ -50,11 +50,11 @@ public class KhachHang {
     {
         this.diachi=diachi;
     }
-    public Date getNgaySinh()
+    public String getNgaySinh()
     {
         return ngaysinh;
     }
-    public void setNgaySinh(Date ngaysinh)
+    public void setNgaySinh(String ngaysinh)
     {
         this.ngaysinh=ngaysinh;
     }
