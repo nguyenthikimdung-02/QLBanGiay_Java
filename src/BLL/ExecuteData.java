@@ -6,6 +6,8 @@ package BLL;
 
 import DAL.DataAccess;
 import DTO.Giay;
+import DTO.NCC;
+import DTO.NSX;
 
 /**
  *
@@ -15,34 +17,51 @@ public class ExecuteData {
     // <editor-fold defaultstate="collapsed" desc="Giay"> 
     public static boolean insertGiay(Giay giay)
     {
-        String temp = String.format("Insert into USER1.GIAY (MAGIAY,TENGIAY,GIABAN,SLTON,MANSX,HINHANH) values ('%s','%s',%s,%s,'%s','%s')",giay.getMaGiay(),giay.getTenGiay(),giay.getGiaBan(),giay.getSLTon(),giay.getNSX(),giay.getImage());
+        String temp = String.format("Insert into KimDung.GIAY (MAGIAY,TENGIAY,GIABAN,SLTON,MANSX,HINHANH) values ('%s','%s',%s,%s)",giay.getMaGiay(),giay.getTenGiay(),giay.getGiaBan(),giay.getNSX());
         return DataAccess.ResultOfExecuteSqlUpdate(temp);
     }
     public static boolean updateGiay(Giay giay)
     {
-        String temp = String.format("Update USER1.GIAY set MAGIAY = '%s', TENGIAY = '%s', GIABAN = %s, SLTON = %s, MANSX = '%s', HINHANH = '%s' where MAGIAY = '%s'",giay.getMaGiay(),giay.getTenGiay(),giay.getGiaBan(),giay.getSLTon(),giay.getNSX(),giay.getImage(),giay.getMaGiay());
+        String temp = String.format("Update KimDung.GIAY set MAGIAY = '%s', TENGIAY = '%s', GIABAN = %s, MANSX = '%s' where MAGIAY = '%s'",giay.getMaGiay(),giay.getTenGiay(),giay.getGiaBan(),giay.getNSX(),giay.getMaGiay());
         return DataAccess.ResultOfExecuteSqlUpdate(temp);
     }
     public static boolean deleteGiay(Giay giay)
     {
-        String temp = String.format("delete from USER1.GIAY where MAGIAY = '%s'",giay.getMaGiay());
+        String temp = String.format("delete from KimDung.GIAY where MAGIAY = '%s'",giay.getMaGiay());
         return DataAccess.ResultOfExecuteSqlUpdate(temp);
     }
     //</editor-fold> 
     // <editor-fold defaultstate="collapsed" desc="NCC"> 
-    public static boolean insertNCC(Giay giay)
+    public static boolean insertNCC(NCC ncc)
     {
-        String temp = String.format("Insert into USER1.NCC (MANCC,TENNCC) values ('%s','%s')",giay.getMaGiay(),giay.getTenGiay());
+        String temp = String.format("Insert into KimDung.NCC (MANCC,TENNCC) values ('%s','%s')",ncc.getMaNCC(),ncc.getTenNCC());
         return DataAccess.ResultOfExecuteSqlUpdate(temp);
     }
-    public static boolean updateNCC(Giay giay)
+    public static boolean updateNCC(NCC ncc)
     {
-        String temp = String.format("Update USER1.NCC set MANCC = '%s', TENNCC = '%s' where MANCC = '%s'",giay.getMaGiay(),giay.getTenGiay(),giay.getMaGiay());
+        String temp = String.format("Update KimDung.NCC set MANCC = '%s', TENNCC = '%s' where MANCC = '%s'",ncc.getMaNCC(),ncc.getTenNCC(),ncc.getMaNCC());
         return DataAccess.ResultOfExecuteSqlUpdate(temp);
     }
-    public static boolean deleteNCC(Giay giay)
+    public static boolean deleteNCC(NCC ncc)
     {
-        String temp = String.format("delete from USER1.NCC where MANCC = '%s'",giay.getMaGiay());
+        String temp = String.format("delete from KimDung.NCC where MANCC = '%s'",ncc.getMaNCC());
+        return DataAccess.ResultOfExecuteSqlUpdate(temp);
+    }
+    //</editor-fold> 
+    // <editor-fold defaultstate="collapsed" desc="NSX"> 
+    public static boolean insertNSX(NSX nsx)
+    {
+        String temp = String.format("Insert into KimDung.NSX (MANSX,TENNSX) values ('%s','%s')",nsx.getMaNSX(),nsx.getTenNSX());
+        return DataAccess.ResultOfExecuteSqlUpdate(temp);
+    }
+    public static boolean updateNSX(NSX nsx)
+    {
+        String temp = String.format("Update KimDung.NSX set MANSX = '%s', TENNSX = '%s' where MANSX = '%s'",nsx.getMaNSX(),nsx.getTenNSX(),nsx.getMaNSX());
+        return DataAccess.ResultOfExecuteSqlUpdate(temp);
+    }
+    public static boolean deleteNSX(NSX nsx)
+    {
+        String temp = String.format("delete from KimDung.NSX where MANSX = '%s'",nsx.getMaNSX());
         return DataAccess.ResultOfExecuteSqlUpdate(temp);
     }
     //</editor-fold> 

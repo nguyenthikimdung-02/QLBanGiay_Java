@@ -14,22 +14,17 @@ public class Giay {
     private String magiay;
     private String tengiay;
     private float giaban;
-    private int slton;
     private String nsx;
-    private Blob imageBlob ;
     public Giay()
     {
-        //test github
 
     }
-    public Giay(String ma, String ten, float gia, int slton, String sx, Blob image)
+    public Giay(String ma, String ten, float gia, String sx)
     {
         this.magiay = ma;
         this.tengiay = ten;
         this.giaban = gia;
-        this.slton = slton;
         this.nsx = sx;
-        this.imageBlob = image;
     }
     public String getMaGiay()
     {
@@ -55,14 +50,6 @@ public class Giay {
     {
         this.giaban=giaban;
     }
-    public int getSLTon()
-    {
-        return slton;
-    }
-    public void setSLTon(int slton)
-    {
-        this.slton=slton;
-    }
     public String getNSX()
     {
         return nsx;
@@ -70,14 +57,6 @@ public class Giay {
     public void setNSX(String nsx)
     {
         this.nsx=nsx;
-    }
-    public Blob getImage()
-    {
-        return imageBlob;
-    }
-    public void setImage(Blob imageBlob)
-    {
-        this.imageBlob=imageBlob;
     }
     
 }
