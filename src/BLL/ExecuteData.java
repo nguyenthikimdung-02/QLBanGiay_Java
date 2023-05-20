@@ -6,6 +6,7 @@ package BLL;
 
 import DAL.DataAccess;
 import DTO.Giay;
+import DTO.KhachHang;
 import DTO.NCC;
 import DTO.NSX;
 
@@ -65,4 +66,21 @@ public class ExecuteData {
         return DataAccess.ResultOfExecuteSqlUpdate(temp);
     }
     //</editor-fold> 
+    // <editor-fold defaultstate="collapsed" desc="KhachHang"> 
+    public static boolean insertKH(KhachHang kh)
+    {
+        String temp = String.format("Insert into KimDung.KHACHHANG (MAKH,TENKH,DIACHI,NGAYSINH) values ('%s','%s','%s','%s')",kh.getMaKH(),kh.getTenKH(),kh.getDiaChi(),kh.getNgaySinh().toString());
+        return DataAccess.ResultOfExecuteSqlUpdate(temp);
+    }
+    public static boolean updateKH(KhachHang kh)
+    {
+        String temp = String.format("Update KimDung.NSX set MAKH = '%s', TENKH = '%s', DIACHI = '%s', NGAYSINH = '%s' where MAKH = '%s'",kh.getMaKH(),kh.getTenKH(),kh.getDiaChi(),kh.getNgaySinh().toString(),kh.getMaKH());
+        return DataAccess.ResultOfExecuteSqlUpdate(temp);
+    }
+    public static boolean deleteKH(KhachHang kh)
+    {
+        String temp = String.format("delete from KimDung.KHACHHANG where MAKH = '%s'",kh.getMaKH());
+        return DataAccess.ResultOfExecuteSqlUpdate(temp);
+    }
+    //</editor-fold>
 }
