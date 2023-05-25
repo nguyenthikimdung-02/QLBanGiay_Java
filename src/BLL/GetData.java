@@ -26,4 +26,8 @@ public class GetData {
         DataAccess da = new DataAccess( String.format("select * from KHACHHANG where MAKH = '%s'", ma));
         return da.QueryTable();
     }
+    public ArrayList getDataNV() {
+        DataAccess da = new DataAccess("SELECT * FROM KimDung.NHANVIEN");
+        return da.QueryTable();
+    }
 }

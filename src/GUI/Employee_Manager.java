@@ -4,6 +4,13 @@
  */
 package GUI;
 
+import BLL.ExecuteData;
+import BLL.GetData;
+import DTO.KhachHang;
+import DTO.NhanVien;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author NGUYEN THI KIM DUNG
@@ -13,8 +20,20 @@ public class Employee_Manager extends javax.swing.JFrame {
     /**
      * Creates new form Employee_Manager
      */
-    public Employee_Manager() {
+    public String username;
+    NhanVien nv = new NhanVien();
+    ExecuteData ex = new ExecuteData();
+    GetData dt = new GetData();
+    public Employee_Manager(String username) {
         initComponents();
+        showDataOnTable();
+        this.username=username;
+        this.setLocationRelativeTo(null);
+        jLabel2.setText(jLabel2.getText()+username);
+    }
+
+    private Employee_Manager() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     /**
@@ -143,7 +162,14 @@ public class Employee_Manager extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    public void showDataOnTable() {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        dt = new GetData();
+        ArrayList arr = dt.getDataNV();
+        String[] tenCot = {"Mã NV", "Tên ID","Tên NV","Ngày sinh","Giới tính", "Địa chỉ","Lương","Ngày vào làm" };
+        model.setDataVector((Object[][]) arr.get(1), tenCot);
+        jTable1.setRowHeight(50);
+    }
     /**
      * @param args the command line arguments
      */
@@ -173,6 +199,7 @@ public class Employee_Manager extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Employee_Manager().setVisible(true);
             }

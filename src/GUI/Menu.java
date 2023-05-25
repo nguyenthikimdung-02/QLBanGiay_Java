@@ -91,6 +91,11 @@ public class Menu extends javax.swing.JFrame {
         btn_Employee.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_Employee.setForeground(new java.awt.Color(255, 255, 255));
         btn_Employee.setText("Employee Manager");
+        btn_Employee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_EmployeeActionPerformed(evt);
+            }
+        });
 
         btn_Bill.setBackground(new java.awt.Color(51, 51, 51));
         btn_Bill.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -232,6 +237,12 @@ public class Menu extends javax.swing.JFrame {
     private void btn_BillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BillActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_BillActionPerformed
+
+    private void btn_EmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EmployeeActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new Employee_Manager(user).setVisible(true);
+    }//GEN-LAST:event_btn_EmployeeActionPerformed
 
     /**
      * @param args the command line arguments
