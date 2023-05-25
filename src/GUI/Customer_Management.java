@@ -5,11 +5,19 @@
 package GUI;
 
 import BLL.ExecuteData;
+import BLL.GetData;
 import DTO.KhachHang;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -23,8 +31,10 @@ public class Customer_Management extends javax.swing.JFrame {
     public String username;
     KhachHang kh = new KhachHang();
     ExecuteData ex = new ExecuteData();
+    GetData dt = new GetData();
     public Customer_Management(String username) {
         initComponents();
+        showDataOnTable();
         this.username=username;
         this.setLocationRelativeTo(null);
         text_Staff.setText(username);
@@ -173,13 +183,28 @@ public class Customer_Management extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jLabel1.setText("Search Customer");
 
         btn_Search.setText("Search");
+        btn_Search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SearchActionPerformed(evt);
+            }
+        });
 
         btn_Load.setText("Load");
+        btn_Load.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_LoadActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -300,6 +325,58 @@ public class Customer_Management extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_InsertActionPerformed
 
+    private void btn_LoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LoadActionPerformed
+        // TODO add your handling code here:
+        showDataOnTable();
+    }//GEN-LAST:event_btn_LoadActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        int row = jTable1.getSelectedRow();
+        if (row != -1) {
+            text_Customer_Code.setText(jTable1.getValueAt(row, 0).toString());
+            text_Customer_Name.setText(jTable1.getValueAt(row, 1).toString());
+            text_Address.setText(jTable1.getValueAt(row, 2).toString());
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yy");
+            String dateStr = jTable1.getValueAt(row, 1).toString();
+            try {
+                text_Date.setDate(dateFormat.parse(dateStr));
+            } catch (ParseException ex) {
+                
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Bạn chưa chọn dòng nào!!!");
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void btn_SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SearchActionPerformed
+        // TODO add your handling code here:
+        try{
+            showDataOnTable_DK();
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(this, "Bạn nhập sai mã khách hàng hoặc " + ex.getMessage());
+            return;
+        }
+        
+    }//GEN-LAST:event_btn_SearchActionPerformed
+    public void showDataOnTable() {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        dt = new GetData();
+        ArrayList arr = dt.getDataKhachHang();
+        String[] tenCot = {"Mã khách hàng", "Tên khách hàng", "Địa chỉ", "Ngày sinh"};
+        model.setDataVector((Object[][]) arr.get(1), tenCot);
+        jTable1.setRowHeight(50);
+    }
+    public void showDataOnTable_DK() {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        dt = new GetData();
+        ArrayList arr = dt.getDataKhachHang(text_Customer_Search.getText());
+        String[] tenCot = {"Mã khách hàng", "Tên khách hàng", "Địa chỉ", "Ngày sinh"};
+        model.setDataVector((Object[][]) arr.get(1), tenCot);
+        jTable1.setRowHeight(50);
+    }
     /**
      * @param args the command line arguments
      */

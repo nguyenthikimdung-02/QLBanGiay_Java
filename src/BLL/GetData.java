@@ -15,7 +15,15 @@ public class GetData {
     //lấy thông tin tất cả giày
     public ArrayList getDataGiay()
     {
-        DataAccess da = new DataAccess("select * from USER1.GIAY");
+        DataAccess da = new DataAccess("select * from KimDung.GIAY");
+        return da.QueryTable();
+    }
+    public ArrayList getDataKhachHang() {
+        DataAccess da = new DataAccess("SELECT * FROM KimDung.KHACHHANG");
+        return da.QueryTable();
+    }
+    public ArrayList getDataKhachHang(String ma){
+        DataAccess da = new DataAccess( String.format("select * from KHACHHANG where MAKH = '%s'", ma));
         return da.QueryTable();
     }
 }

@@ -82,5 +82,6 @@ public class ExecuteData {
         String temp = String.format("delete from KimDung.KHACHHANG where MAKH = '%s'",kh.getMaKH());
         return DataAccess.ResultOfExecuteSqlUpdate(temp);
     }
+    
     //</editor-fold>
 }

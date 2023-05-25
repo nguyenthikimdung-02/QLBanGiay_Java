@@ -130,6 +130,7 @@ public class DataAccess {
     // Lấy kết quả câu lệnh thực thi không truy vấn
     public static boolean ResultOfExecuteSql (String query) {
         try {
+            st=conn.createStatement();
             st.executeQuery (query);
             return true;
         } catch ( SQLException err ) {
@@ -144,6 +145,7 @@ public class DataAccess {
     
     public static boolean ResultOfExecuteSqlUpdate (String query) {
         try {
+            st=conn.createStatement();
             st.executeUpdate(query);
             return true;
         } catch ( SQLException err ) {
