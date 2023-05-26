@@ -9,6 +9,7 @@ import DTO.Giay;
 import DTO.KhachHang;
 import DTO.NCC;
 import DTO.NSX;
+import DTO.NhanVien;
 
 /**
  *
@@ -74,12 +75,30 @@ public class ExecuteData {
     }
     public static boolean updateKH(KhachHang kh)
     {
-        String temp = String.format("Update KimDung.NSX set MAKH = '%s', TENKH = '%s', DIACHI = '%s', NGAYSINH = '%s' where MAKH = '%s'",kh.getMaKH(),kh.getTenKH(),kh.getDiaChi(),kh.getNgaySinh().toString(),kh.getMaKH());
+        String temp = String.format("Update KimDung.KHACHHANG set MAKH = '%s', TENKH = '%s', DIACHI = '%s', NGAYSINH = '%s' where MAKH = '%s'",kh.getMaKH(),kh.getTenKH(),kh.getDiaChi(),kh.getNgaySinh().toString(),kh.getMaKH());
         return DataAccess.ResultOfExecuteSqlUpdate(temp);
     }
     public static boolean deleteKH(KhachHang kh)
     {
         String temp = String.format("delete from KimDung.KHACHHANG where MAKH = '%s'",kh.getMaKH());
+        return DataAccess.ResultOfExecuteSqlUpdate(temp);
+    }
+    
+    //</editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="NhanVien"> 
+    public static boolean insertNV(NhanVien nv)
+    {
+        String temp = String.format("Insert into KimDung.NHANVIEN (MANV,TENNV,NGAYSINH,GIOITINH,DIACHI,LUONG,NGAYVAOLAM) values ('%s','%s','%s','%s','%s','%s','%s')",nv.getMaNV(),nv.getTenNV(),nv.getNgaySinh().toString(),nv.getGioiTinh(),nv.getDiaChi(),nv.getLuong(),nv.getNgaySinh().toString());
+        return DataAccess.ResultOfExecuteSqlUpdate(temp);
+    }
+    public static boolean updateNV(NhanVien nv)
+    {
+        String temp = String.format("Update KimDung.NHANVIEN set MANV = '%s', TENNV = '%s', NGAYSINH = '%s', GIOITINH = '%s', DIACHI = '%s',LUONG = '%s',NGAYVAOLAM = '%s' where MANV = '%s'",nv.getMaNV(),nv.getTenNV(),nv.getNgaySinh().toString(),nv.getGioiTinh(),nv.getDiaChi(),nv.getLuong(),nv.getNgaySinh().toString(),nv.getMaNV());
+        return DataAccess.ResultOfExecuteSqlUpdate(temp);
+    }
+    public static boolean deleteNV(NhanVien nv)
+    {
+        String temp = String.format("delete from KimDung.NHANVIEN where MANV = '%s'",nv.getMaNV());
         return DataAccess.ResultOfExecuteSqlUpdate(temp);
     }
     

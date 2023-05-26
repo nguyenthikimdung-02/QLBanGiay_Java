@@ -30,4 +30,8 @@ public class GetData {
         DataAccess da = new DataAccess("SELECT * FROM KimDung.NHANVIEN");
         return da.QueryTable();
     }
+    public ArrayList getDataNV(String ma) {
+        DataAccess da = new DataAccess(String.format("SELECT * FROM KimDung.NHANVIEN where MANV = '%s'",ma));
+        return da.QueryTable();
+    }
 }
