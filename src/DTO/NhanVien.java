@@ -14,16 +14,16 @@ public class NhanVien {
     private String manv;
     private String tennv;
     private String tenid;
-    private Date ngaysinh;
+    private String ngaysinh;
     private String gioitinh;
     private String diachi;
-    private double luong;
-    private Date ngayvaolam;
+    private String luong;
+    private String ngayvaolam;
     public NhanVien()
     {
 
     }
-    public NhanVien(String manv, String tennv, String tenid, Date ngaysinh,String gioitinh, String diachi,double luong, Date ngayvaolam)
+    public NhanVien(String manv, String tennv, String tenid, String ngaysinh,String gioitinh, String diachi,String luong, String ngayvaolam)
     {
         this.manv = manv;
         this.tennv = tennv;
@@ -66,11 +66,11 @@ public class NhanVien {
     {
         this.diachi=diachi;
     }
-    public Date getNgaySinh()
+    public String getNgaySinh()
     {
         return ngaysinh;
     }
-    public void setNgaySinh(Date ngaysinh)
+    public void setNgaySinh(String ngaysinh)
     {
         this.ngaysinh=ngaysinh;
     }
@@ -82,19 +82,19 @@ public class NhanVien {
     {
         this.gioitinh=gioitinh;
     }
-    public double getLuong()
+    public String getLuong()
     {
         return luong;
     }
-    public void setLuong(double luong)
+    public void setLuong(String luong)
     {
         this.luong=luong;
     }
-    public Date getNgayVaoLam()
+    public String getNgayVaoLam()
     {
         return ngayvaolam;
     }
-    public void setNgayVaoLam(Date ngayvaolam)
+    public void setNgayVaoLam(String ngayvaolam)
     {
         this.ngayvaolam=ngayvaolam;
     }

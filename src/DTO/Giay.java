@@ -13,13 +13,13 @@ import java.sql.Blob;
 public class Giay {
     private String magiay;
     private String tengiay;
-    private float giaban;
+    private String giaban;
     private String nsx;
     public Giay()
     {
 
     }
-    public Giay(String ma, String ten, float gia, String sx)
+    public Giay(String ma, String ten, String gia, String sx)
     {
         this.magiay = ma;
         this.tengiay = ten;
@@ -42,11 +42,11 @@ public class Giay {
     {
         this.tengiay = tengiay;
     }
-    public float getGiaBan()
+    public String getGiaBan()
     {
         return giaban;
     }
-    public void setGiaBan(float giaban)
+    public void setGiaBan(String giaban)
     {
         this.giaban=giaban;
     }

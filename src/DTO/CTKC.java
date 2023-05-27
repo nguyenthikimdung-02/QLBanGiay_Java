@@ -11,12 +11,12 @@ package DTO;
 public class CTKC {
     private String size;
     private String magiay;
-    private int sl;
+    private String sl;
     public CTKC()
     {
 
     }
-    public CTKC(String size, String magiay, int sl)
+    public CTKC(String size, String magiay, String sl)
     {
         this.size = size;
         this.magiay = magiay;
@@ -38,11 +38,11 @@ public class CTKC {
     {
         this.size=size;
     }
-    public int getSL()
+    public String getSL()
     {
         return sl;
     }
-    public void setSL(int sl)
+    public void setSL(String sl)
     {
         this.sl=sl;
     }

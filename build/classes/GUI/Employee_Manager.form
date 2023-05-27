@@ -188,6 +188,9 @@
                   </Table>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable1MouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -205,6 +208,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Update Employee"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton3">
       <Properties>
@@ -346,6 +352,9 @@
           </Properties>
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="text_Date">
+          <Properties>
+            <Property name="dateFormatString" type="java.lang.String" value="dd - MM - yyyy"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>
@@ -357,6 +366,7 @@
             <Property name="text" type="java.lang.String" value="Man"/>
           </Properties>
           <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="rdb_ManItemStateChanged"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdb_ManActionPerformed"/>
           </Events>
         </Component>
@@ -364,6 +374,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Women"/>
           </Properties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="rdb_WomenItemStateChanged"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>
@@ -385,6 +398,9 @@
           </Properties>
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="text_Working_Day">
+          <Properties>
+            <Property name="dateFormatString" type="java.lang.String" value="dd - MM - yyyy"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

@@ -34,4 +34,24 @@ public class GetData {
         DataAccess da = new DataAccess(String.format("SELECT * FROM KimDung.NHANVIEN where MANV = '%s'",ma));
         return da.QueryTable();
     }
+    public ArrayList getDataCTPN() {
+        DataAccess da = new DataAccess("SELECT * FROM KimDung.CTPN");
+        return da.QueryTable();
+    }
+    public Object[][] getAllManufacturerName() {
+        DataAccess da = new DataAccess(
+                "SELECT MaNSX from KimDung.NSX");
+        return da.QueryContentTable();
+    }
+    public Object[][] getAllSupplierName() {
+        DataAccess da = new DataAccess(
+                "SELECT MaNCC from KimDung.NCC");
+        return da.QueryContentTable();
+    }
+    public Object[][] getAllSize() {
+        DataAccess da = new DataAccess(
+                "SELECT KichCo from KimDung.KichCo");
+        return da.QueryContentTable();
+    }
+    
 }

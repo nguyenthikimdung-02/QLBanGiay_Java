@@ -8,6 +8,12 @@ import BLL.ExecuteData;
 import BLL.GetData;
 import DTO.KhachHang;
 import DTO.NhanVien;
+import java.awt.event.ItemEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -31,6 +37,7 @@ public class Employee_Manager extends javax.swing.JFrame {
         this.username=username;
         this.setLocationRelativeTo(null);
         jLabel2.setText(jLabel2.getText()+username);
+        
     }
 
     private Employee_Manager() {
@@ -115,6 +122,11 @@ public class Employee_Manager extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -142,6 +154,11 @@ public class Employee_Manager extends javax.swing.JFrame {
         });
 
         jButton2.setText("Update Employee");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Delete Employee");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -168,9 +185,16 @@ public class Employee_Manager extends javax.swing.JFrame {
 
         jLabel6.setText("Date of birth");
 
+        text_Date.setDateFormatString("dd - MM - yyyy");
+
         jLabel7.setText("Sex");
 
         rdb_Man.setText("Man");
+        rdb_Man.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rdb_ManItemStateChanged(evt);
+            }
+        });
         rdb_Man.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rdb_ManActionPerformed(evt);
@@ -178,12 +202,19 @@ public class Employee_Manager extends javax.swing.JFrame {
         });
 
         rdb_Women.setText("Women");
+        rdb_Women.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rdb_WomenItemStateChanged(evt);
+            }
+        });
 
         jLabel8.setText("Address");
 
         jLabel9.setText("Salary");
 
         jLabel10.setText("Working day");
+
+        text_Working_Day.setDateFormatString("dd - MM - yyyy");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -343,10 +374,42 @@ public class Employee_Manager extends javax.swing.JFrame {
         this.setVisible(false);
         new Menu(username).setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
-
+    private String gioitinh = "";
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+        try{
+            String manv = text_Identifier.getText();
+            String tennv = text_Name.getText();
+            String diachi = text_Address.getText();
+            String luong = text_Salary.getText();
+            LocalDate localDate = text_Date.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yy");
+            String ngaysinh = localDate.format(formatter);
+            LocalDate localDate2 = text_Working_Day.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            String ngayvaolam = localDate2.format(formatter);
+            
+            
+            nv.setMaNV(manv);
+            nv.setTenNV(tennv);
+            nv.setNgaySinh(ngaysinh);
+            nv.setGioiTinh(gioitinh);
+            nv.setDiaChi(diachi);
+            nv.setLuong(luong);
+            nv.setNgayVaoLam(ngayvaolam);
+            
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn thông tin đầy đủ hoặc " + ex.getMessage());
+            return;
+        }
+        if(ExecuteData.insertNV(nv))
+        {
+            JOptionPane.showMessageDialog(this, "Thêm Thành Công");
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Thêm thất bại");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void rdb_ManActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdb_ManActionPerformed
@@ -372,8 +435,103 @@ public class Employee_Manager extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        
+        try{
+            int row = jTable1.getSelectedRow();
+            String rowDele = "";
+            if (row != -1) {
+                rowDele = jTable1.getValueAt(row, 0).toString();
+                nv.setMaNV(rowDele);
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "Bạn chưa chọn dòng nào!!!");
+            }
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn dòng nào hoặc " + ex.getMessage());
+            return;
+        }
+        if(ExecuteData.deleteNV(nv))
+        {
+            JOptionPane.showMessageDialog(this, "Xóa Thành Công");
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Xóa thất bại");
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        int row = jTable1.getSelectedRow();
+        if (row != -1) {
+            text_Identifier.setText(jTable1.getValueAt(row, 0).toString());
+            text_Name.setText(jTable1.getValueAt(row, 2).toString());
+            text_Address.setText(jTable1.getValueAt(row, 5).toString());
+            text_Salary.setText(jTable1.getValueAt(row, 6).toString());
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yy");
+            String dateStr = jTable1.getValueAt(row, 1).toString();
+            try {
+                text_Date.setDate(dateFormat.parse(dateStr));
+            } catch (ParseException ex) {
+                
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Bạn chưa chọn dòng nào!!!");
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void rdb_ManItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdb_ManItemStateChanged
+        // TODO add your handling code here:
+        if(evt.getStateChange()== ItemEvent.SELECTED)
+        {
+            gioitinh = "Nam";
+        }
+    }//GEN-LAST:event_rdb_ManItemStateChanged
+
+    private void rdb_WomenItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdb_WomenItemStateChanged
+        // TODO add your handling code here:
+        if(evt.getStateChange()== ItemEvent.SELECTED)
+        {
+            gioitinh = "Nu";
+        }
+    }//GEN-LAST:event_rdb_WomenItemStateChanged
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        try{
+            String manv = text_Identifier.getText();
+            String tennv = text_Name.getText();
+            String diachi = text_Address.getText();
+            String luong = text_Salary.getText();
+            LocalDate localDate = text_Date.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yy");
+            String ngaysinh = localDate.format(formatter);
+            LocalDate localDate2 = text_Working_Day.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            String ngayvaolam = localDate2.format(formatter);
+            
+            
+            nv.setMaNV(manv);
+            nv.setTenNV(tennv);
+            nv.setNgaySinh(ngaysinh);
+            nv.setGioiTinh(gioitinh);
+            nv.setDiaChi(diachi);
+            nv.setLuong(luong);
+            nv.setNgayVaoLam(ngayvaolam);
+            
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn thông tin đầy đủ hoặc " + ex.getMessage());
+            return;
+        }
+        if(ExecuteData.updateNV(nv))
+        {
+            JOptionPane.showMessageDialog(this, "Cập Nhập Thành Công");
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Cập nhật thất bại");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
     public void showDataOnTable() {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         dt = new GetData();

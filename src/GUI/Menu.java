@@ -47,7 +47,7 @@ public class Menu extends javax.swing.JFrame {
         btn_logout = new javax.swing.JButton();
         btn_Customer = new javax.swing.JButton();
         btn_Employee = new javax.swing.JButton();
-        btn_Bill = new javax.swing.JButton();
+        btn_Product = new javax.swing.JButton();
         btn_Shoes = new javax.swing.JButton();
         btn_Import = new javax.swing.JButton();
         btn_Supplier = new javax.swing.JButton();
@@ -96,13 +96,13 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        btn_Bill.setBackground(new java.awt.Color(51, 51, 51));
-        btn_Bill.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btn_Bill.setForeground(new java.awt.Color(255, 255, 255));
-        btn_Bill.setText("Product Management");
-        btn_Bill.addActionListener(new java.awt.event.ActionListener() {
+        btn_Product.setBackground(new java.awt.Color(51, 51, 51));
+        btn_Product.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_Product.setForeground(new java.awt.Color(255, 255, 255));
+        btn_Product.setText("Product Management");
+        btn_Product.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_BillActionPerformed(evt);
+                btn_ProductActionPerformed(evt);
             }
         });
 
@@ -115,6 +115,11 @@ public class Menu extends javax.swing.JFrame {
         btn_Import.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_Import.setForeground(new java.awt.Color(255, 255, 255));
         btn_Import.setText("Import Goods");
+        btn_Import.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ImportActionPerformed(evt);
+            }
+        });
 
         btn_Supplier.setBackground(new java.awt.Color(51, 51, 51));
         btn_Supplier.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -150,12 +155,11 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(69, 69, 69)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btn_Manufacturer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(btn_Employee, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_Import, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(btn_Employee, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_Import, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(52, 52, 52)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btn_Bill, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_Product, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_Supplier, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(54, Short.MAX_VALUE))
         );
@@ -176,7 +180,7 @@ public class Menu extends javax.swing.JFrame {
                         .addGap(57, 57, 57))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btn_Bill, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_Product, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn_Customer, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(9, 9, 9)))
                 .addComponent(btn_Import, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -225,15 +229,23 @@ public class Menu extends javax.swing.JFrame {
         new Customer_Management(user).setVisible(true);
     }//GEN-LAST:event_btn_CustomerActionPerformed
 
-    private void btn_BillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BillActionPerformed
+    private void btn_ProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ProductActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btn_BillActionPerformed
+        this.setVisible(false);
+        new Product_Management(user).setVisible(true);
+    }//GEN-LAST:event_btn_ProductActionPerformed
 
     private void btn_EmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EmployeeActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
         new Employee_Manager(user).setVisible(true);
     }//GEN-LAST:event_btn_EmployeeActionPerformed
+
+    private void btn_ImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ImportActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new Import_Goods(user).setVisible(true);
+    }//GEN-LAST:event_btn_ImportActionPerformed
 
     /**
      * @param args the command line arguments
@@ -272,11 +284,11 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_Bill;
     private javax.swing.JButton btn_Customer;
     private javax.swing.JButton btn_Employee;
     private javax.swing.JButton btn_Import;
     private javax.swing.JButton btn_Manufacturer;
+    private javax.swing.JButton btn_Product;
     private javax.swing.JButton btn_Shoes;
     private javax.swing.JButton btn_Supplier;
     private javax.swing.JButton btn_logout;

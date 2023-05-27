@@ -59,14 +59,12 @@
                   <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="btn_Manufacturer" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btn_Employee" max="32767" attributes="0"/>
-                          <Component id="btn_Import" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="btn_Employee" max="32767" attributes="0"/>
+                      <Component id="btn_Import" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="btn_Bill" max="32767" attributes="0"/>
+                      <Component id="btn_Product" max="32767" attributes="0"/>
                       <Component id="btn_Supplier" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="54" max="32767" attributes="0"/>
@@ -92,7 +90,7 @@
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="btn_Bill" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="btn_Product" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
                               <Component id="btn_Customer" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
@@ -184,7 +182,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_EmployeeActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btn_Bill">
+        <Component class="javax.swing.JButton" name="btn_Product">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="33" green="33" red="33" type="rgb"/>
@@ -198,7 +196,7 @@
             <Property name="text" type="java.lang.String" value="Product Management"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_BillActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ProductActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_Shoes">
@@ -228,6 +226,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Import Goods"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ImportActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_Supplier">
           <Properties>

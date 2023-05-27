@@ -13,17 +13,17 @@ import java.util.Date;
 public class CTPN {
     private String maphieu;
     private String magiay;
-    private Date ngaynhap;
+    private String ngaynhap;
     private String kichco;
     private String mansx;
     private String mancc;
-    private int sl;
-    private double gianhap;
+    private String sl;
+    private String gianhap;
     public CTPN()
     {
 
     }
-    public CTPN(String maphieu, String magiay, Date ngaynhap, String kichco, String mansx,String mancc, int sl,double gianhap)
+    public CTPN(String maphieu, String magiay, String ngaynhap, String kichco, String mansx,String mancc, String sl,String gianhap)
     {
         this.maphieu = maphieu;
         this.magiay = magiay;
@@ -50,11 +50,11 @@ public class CTPN {
     {
         this.magiay = magiay;
     }
-    public Date getNgayNhap()
+    public String getNgayNhap()
     {
         return ngaynhap;
     }
-    public void setNgayNhap(Date ngaynhap)
+    public void setNgayNhap(String ngaynhap)
     {
         this.ngaynhap=ngaynhap;
     }
@@ -66,19 +66,19 @@ public class CTPN {
     {
         this.kichco=kichco;
     }
-    public int getSL()
+    public String getSL()
     {
         return sl;
     }
-    public void setSL(int sl)
+    public void setSL(String sl)
     {
         this.sl=sl;
     }
-    public double getGiaNhap()
+    public String getGiaNhap()
     {
         return gianhap;
     }
-    public void setGiaNhap(double gianhap)
+    public void setGiaNhap(String gianhap)
     {
         this.gianhap=gianhap;
     }

@@ -310,6 +310,7 @@ public class Customer_Management extends javax.swing.JFrame {
             kh.setTenKH(tenkh);
             kh.setDiaChi(diachi);
             kh.setNgaySinh(ngaysinh);
+            
         }
         catch(Exception ex)
         {
@@ -323,6 +324,7 @@ public class Customer_Management extends javax.swing.JFrame {
         else {
             JOptionPane.showMessageDialog(this, "Thêm thất bại");
         }
+        
     }//GEN-LAST:event_btn_InsertActionPerformed
 
     private void btn_LoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LoadActionPerformed

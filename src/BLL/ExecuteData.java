@@ -5,6 +5,8 @@
 package BLL;
 
 import DAL.DataAccess;
+import DTO.CTKC;
+import DTO.CTPN;
 import DTO.Giay;
 import DTO.KhachHang;
 import DTO.NCC;
@@ -19,7 +21,7 @@ public class ExecuteData {
     // <editor-fold defaultstate="collapsed" desc="Giay"> 
     public static boolean insertGiay(Giay giay)
     {
-        String temp = String.format("Insert into KimDung.GIAY (MAGIAY,TENGIAY,GIABAN,SLTON,MANSX,HINHANH) values ('%s','%s',%s,%s)",giay.getMaGiay(),giay.getTenGiay(),giay.getGiaBan(),giay.getNSX());
+        String temp = String.format("Insert into KimDung.GIAY (MAGIAY,TENGIAY,GIABAN,MANSX) values ('%s','%s',%s,'%s')",giay.getMaGiay(),giay.getTenGiay(),giay.getGiaBan(),giay.getNSX());
         return DataAccess.ResultOfExecuteSqlUpdate(temp);
     }
     public static boolean updateGiay(Giay giay)
@@ -88,12 +90,12 @@ public class ExecuteData {
     // <editor-fold defaultstate="collapsed" desc="NhanVien"> 
     public static boolean insertNV(NhanVien nv)
     {
-        String temp = String.format("Insert into KimDung.NHANVIEN (MANV,TENNV,NGAYSINH,GIOITINH,DIACHI,LUONG,NGAYVAOLAM) values ('%s','%s','%s','%s','%s','%s','%s')",nv.getMaNV(),nv.getTenNV(),nv.getNgaySinh().toString(),nv.getGioiTinh(),nv.getDiaChi(),nv.getLuong(),nv.getNgaySinh().toString());
+        String temp = String.format("Insert into KimDung.NHANVIEN (MANV,TENNV,NGAYSINH,GIOITINH,DIACHI,LUONG,NGAYVAOLAM) values ('%s','%s','%s','%s','%s',%s,'%s')",nv.getMaNV(),nv.getTenNV(),nv.getNgaySinh().toString(),nv.getGioiTinh(),nv.getDiaChi(),nv.getLuong(),nv.getNgayVaoLam().toString());
         return DataAccess.ResultOfExecuteSqlUpdate(temp);
     }
     public static boolean updateNV(NhanVien nv)
     {
-        String temp = String.format("Update KimDung.NHANVIEN set MANV = '%s', TENNV = '%s', NGAYSINH = '%s', GIOITINH = '%s', DIACHI = '%s',LUONG = '%s',NGAYVAOLAM = '%s' where MANV = '%s'",nv.getMaNV(),nv.getTenNV(),nv.getNgaySinh().toString(),nv.getGioiTinh(),nv.getDiaChi(),nv.getLuong(),nv.getNgaySinh().toString(),nv.getMaNV());
+        String temp = String.format("Update KimDung.NHANVIEN set MANV = '%s', TENNV = '%s', NGAYSINH = '%s', GIOITINH = '%s', DIACHI = '%s',LUONG = %s,NGAYVAOLAM = '%s' where MANV = '%s'",nv.getMaNV(),nv.getTenNV(),nv.getNgaySinh().toString(),nv.getGioiTinh(),nv.getDiaChi(),nv.getLuong(),nv.getNgayVaoLam().toString(),nv.getMaNV());
         return DataAccess.ResultOfExecuteSqlUpdate(temp);
     }
     public static boolean deleteNV(NhanVien nv)
@@ -103,4 +105,38 @@ public class ExecuteData {
     }
     
     //</editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="CTKC"> 
+    public static boolean insertCTKC(CTKC ct)
+    {
+        String temp = String.format("Insert into KimDung.CTKC (KICHCO,MAGIAY,SOLUONG) values ('%s','%s',%s)",ct.getSize(),ct.getMaGiay(),ct.getSL());
+        return DataAccess.ResultOfExecuteSqlUpdate(temp);
+    }
+    public static boolean updateCTKC(CTKC ct)
+    {
+        String temp = String.format("Update KimDung.CTKC set KICHCO = '%s', MAGIAY = '%s',SOLUONG=%s where KICHCO = '%s'",ct.getSize(),ct.getMaGiay(),ct.getSL(),ct.getSize());
+        return DataAccess.ResultOfExecuteSqlUpdate(temp);
+    }
+    public static boolean deleteCTKC(CTKC ct)
+    {
+        String temp = String.format("delete from KimDung.CTKC where KICHCO = '%s' and MAGIAY = '%s'",ct.getSize(),ct.getMaGiay());
+        return DataAccess.ResultOfExecuteSqlUpdate(temp);
+    }
+    //</editor-fold> 
+    // <editor-fold defaultstate="collapsed" desc="CTPN"> 
+    public static boolean insertCTPN(CTPN ct)
+    {
+        String temp = String.format("Insert into KimDung.CTPN (MAPN,MAGIAY,NGAYNHAP,KICHCO,SL,GIANHAP,MANSX,MANCC) values ('%s','%s','%s','%s',%s,%s,'%s','%s')",ct.getMaPhieu(),ct.getMaGiay(),ct.getNgayNhap(),ct.getSize(),ct.getSL(),ct.getGiaNhap(),ct.getMaNSX(),ct.getMaNCC());
+        return DataAccess.ResultOfExecuteSqlUpdate(temp);
+    }
+    public static boolean updateCTPN(CTPN ct)
+    {
+        String temp = String.format("Update KimDung.CTPN set MAPN = '%s', MAGIAY = '%s',NGAYNHAP = '%s',KICHCO='%s',SL= %s,GIANHAP= %s,MANSX = '%s', MANCC = '%s' where MAPN = '%s'",ct.getMaPhieu(),ct.getMaGiay(),ct.getNgayNhap(),ct.getSize(),ct.getSL(),ct.getGiaNhap(),ct.getMaNSX(),ct.getMaNCC(),ct.getMaPhieu());
+        return DataAccess.ResultOfExecuteSqlUpdate(temp);
+    }
+    public static boolean deleteCTPN(CTPN ct)
+    {
+        String temp = String.format("delete from KimDung.CTPN where MAPN = '%s' and MAGIAY = '%s'",ct.getMaPhieu(),ct.getMaGiay());
+        return DataAccess.ResultOfExecuteSqlUpdate(temp);
+    }
+    //</editor-fold> 
 }
