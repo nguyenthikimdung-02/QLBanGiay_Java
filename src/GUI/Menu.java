@@ -110,6 +110,11 @@ public class Menu extends javax.swing.JFrame {
         btn_Shoes.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_Shoes.setForeground(new java.awt.Color(255, 255, 255));
         btn_Shoes.setText("Selling Shoes");
+        btn_Shoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ShoesActionPerformed(evt);
+            }
+        });
 
         btn_Import.setBackground(new java.awt.Color(51, 51, 51));
         btn_Import.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -246,6 +251,12 @@ public class Menu extends javax.swing.JFrame {
         this.setVisible(false);
         new Import_Goods(user).setVisible(true);
     }//GEN-LAST:event_btn_ImportActionPerformed
+
+    private void btn_ShoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ShoesActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new Selling_Shoes(user).setVisible(true);
+    }//GEN-LAST:event_btn_ShoesActionPerformed
 
     /**
      * @param args the command line arguments

@@ -212,6 +212,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Selling Shoes"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ShoesActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_Import">
           <Properties>

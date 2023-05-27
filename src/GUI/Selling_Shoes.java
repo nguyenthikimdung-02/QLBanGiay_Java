@@ -4,6 +4,13 @@
  */
 package GUI;
 
+import BLL.ExecuteData;
+import BLL.GetData;
+import DTO.CTHD;
+import DTO.Giay;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author NGUYEN THI KIM DUNG
@@ -13,10 +20,29 @@ public class Selling_Shoes extends javax.swing.JFrame {
     /**
      * Creates new form Selling_Shoes
      */
-    public Selling_Shoes() {
+    public String username;
+    Giay giay = new Giay();
+    CTHD ct = new CTHD();
+    ExecuteData ex = new ExecuteData();
+    GetData dt = new GetData();
+    public Selling_Shoes(String username) {
         initComponents();
+        showDataOnTable();
+        this.username=username;
+        this.setLocationRelativeTo(null);
     }
 
+    private Selling_Shoes() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    public void showDataOnTable() {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        dt = new GetData();
+        ArrayList arr = dt.getDataGiay();
+        String[] tenCot = {"Mã Giày", "Tên Giày","Giá Bán","Nhà Sản Xuất"};
+        model.setDataVector((Object[][]) arr.get(1), tenCot);
+        jTable1.setRowHeight(50);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -218,6 +244,7 @@ public class Selling_Shoes extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Selling_Shoes().setVisible(true);
             }
