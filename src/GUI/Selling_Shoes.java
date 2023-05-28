@@ -407,20 +407,13 @@ public class Selling_Shoes extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         try{
-            
+            JOptionPane.showMessageDialog(this, "Tổng tiền bạn phải thanh toán là: "+text_Total.getText());
             
         }
         catch(Exception ex)
         {
             JOptionPane.showMessageDialog(this, "Bạn chưa chọn thông tin đầy đủ hoặc " + ex.getMessage());
             return;
-        }
-        if(ExecuteData.updateGiay(giay))
-        {
-            JOptionPane.showMessageDialog(this, "Cập Nhật Thành Công");
-        }
-        else {
-            JOptionPane.showMessageDialog(this, "Cập nhật thất bại");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 

@@ -4,6 +4,13 @@
  */
 package GUI;
 
+import BLL.ExecuteData;
+import BLL.GetData;
+import DTO.NSX;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author NGUYEN THI KIM DUNG
@@ -13,10 +20,35 @@ public class Manufacturer extends javax.swing.JFrame {
     /**
      * Creates new form Manufacturer
      */
-    public Manufacturer() {
+    public String username;
+    NSX nsx = new NSX();
+    ExecuteData ex = new ExecuteData();
+    GetData dt = new GetData();
+    public Manufacturer(String username) {
         initComponents();
+        showDataOnTable();
+        this.username=username;
+        this.setLocationRelativeTo(null);
     }
-
+    private Manufacturer() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    public void showDataOnTable() {
+        DefaultTableModel model = (DefaultTableModel) tbl_Manufacturer.getModel();
+        dt = new GetData();
+        ArrayList arr = dt.getDataNSX();
+        String[] tenCot = {"Mã nhà sản xuất", "Tên nhà sản xuất"};
+        model.setDataVector((Object[][]) arr.get(1), tenCot);
+        tbl_Manufacturer.setRowHeight(50);
+    }
+    public void showDataOnTable_DK() {
+        DefaultTableModel model = (DefaultTableModel) tbl_Manufacturer.getModel();
+        dt = new GetData();
+        ArrayList arr = dt.getDataNSX(text_Code_Search.getText());
+        String[] tenCot = {"Mã nhà sản xuất", "Tên nhà sản xuất"};
+        model.setDataVector((Object[][]) arr.get(1), tenCot);
+        tbl_Manufacturer.setRowHeight(50);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -71,6 +103,11 @@ public class Manufacturer extends javax.swing.JFrame {
         jLabel2.setText("Manufacturer Code");
 
         btn_Search.setText("Search");
+        btn_Search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SearchActionPerformed(evt);
+            }
+        });
 
         tbl_Manufacturer.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -83,6 +120,11 @@ public class Manufacturer extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbl_Manufacturer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_ManufacturerMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbl_Manufacturer);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Insert/Update"));
@@ -92,8 +134,18 @@ public class Manufacturer extends javax.swing.JFrame {
         jLabel4.setText("Name");
 
         btn_Insert.setText("Insert");
+        btn_Insert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_InsertActionPerformed(evt);
+            }
+        });
 
         btn_Update.setText("Update");
+        btn_Update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_UpdateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -137,8 +189,18 @@ public class Manufacturer extends javax.swing.JFrame {
         );
 
         btn_Return.setText("Back");
+        btn_Return.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ReturnActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Load");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -188,6 +250,82 @@ public class Manufacturer extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        showDataOnTable();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btn_ReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReturnActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new Menu(username).setVisible(true);
+    }//GEN-LAST:event_btn_ReturnActionPerformed
+
+    private void btn_SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SearchActionPerformed
+        // TODO add your handling code here:
+        try{
+            showDataOnTable_DK();
+        } catch(Exception ex) {
+            JOptionPane.showMessageDialog(this, "Bạn nhập sai mã nhà sản xuất hoặc " + ex.getMessage());
+            return;
+        }
+    }//GEN-LAST:event_btn_SearchActionPerformed
+
+    private void btn_InsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_InsertActionPerformed
+        // TODO add your handling code here:
+        try{
+            String mansx = text_ID_Insert_Update.getText();
+            String tennsx = text_Name.getText();
+            nsx.setMaNSX(mansx);
+            nsx.setTenNSX(tennsx);           
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn thông tin đầy đủ hoặc " + ex.getMessage());
+            return;
+        }
+        if(ExecuteData.insertNSX(nsx))
+        {
+            JOptionPane.showMessageDialog(this, "Thêm Thành Công");
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Thêm thất bại");
+        }
+    }//GEN-LAST:event_btn_InsertActionPerformed
+
+    private void btn_UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_UpdateActionPerformed
+        // TODO add your handling code here:
+        try{
+            String mansx = text_ID_Insert_Update.getText();
+            String tennsx = text_Name.getText();
+            nsx.setMaNSX(mansx);
+            nsx.setTenNSX(tennsx);           
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn thông tin đầy đủ hoặc " + ex.getMessage());
+            return;
+        }
+        if(ExecuteData.updateNSX(nsx))
+        {
+            JOptionPane.showMessageDialog(this, "Sửa Thành Công");
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Sửa thất bại");
+        }   
+    }//GEN-LAST:event_btn_UpdateActionPerformed
+
+    private void tbl_ManufacturerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_ManufacturerMouseClicked
+        // TODO add your handling code here:
+        int row = tbl_Manufacturer.getSelectedRow();
+        if (row != -1) {
+            text_ID_Insert_Update.setText(tbl_Manufacturer.getValueAt(row, 0).toString());
+            text_Name.setText(tbl_Manufacturer.getValueAt(row, 1).toString());            
+        } else {
+            JOptionPane.showMessageDialog(null, "Bạn chưa chọn dòng nào!!!");
+        }
+    }//GEN-LAST:event_tbl_ManufacturerMouseClicked
 
     /**
      * @param args the command line arguments

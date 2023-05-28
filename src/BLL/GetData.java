@@ -86,4 +86,12 @@ public class GetData {
                 String.format("select SOLUONG from KimDung.CTKC where KichCo = '%s' and MaGiay = '%s'",kc,ma));
         return da.QueryContentTable();
     }
+    public ArrayList getDataNSX(){
+        DataAccess da = new DataAccess("select * from KimDung.NSX");
+        return da.QueryTable();
+    }
+    public ArrayList getDataNSX(String ma){
+        DataAccess da = new DataAccess(String.format("select * from KimDung.NSX where MANSX='%s'", ma ));
+        return da.QueryTable();
+    }
 }
