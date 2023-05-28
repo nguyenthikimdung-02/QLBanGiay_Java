@@ -12,18 +12,14 @@ import java.util.Date;
  */
 public class HoaDon {
     private String mahd;
-    private String magiay;
-    private String manv;
-    private Date ngayin;
+    private String ngayin;
     public HoaDon()
     {
 
     }
-    public HoaDon(String mahd, String magiay, String manv, Date ngayin)
+    public HoaDon(String mahd, String ngayin)
     {
         this.mahd = mahd;
-        this.magiay = magiay;
-        this.manv = manv;
         this.ngayin = ngayin;
     }
     public String getMaHD()
@@ -34,27 +30,11 @@ public class HoaDon {
     {
         this.mahd = mahd;
     }
-    public String getMaGiay()
-    {
-        return magiay;
-    }
-    public void setMaGiay(String magiay)
-    {
-        this.magiay = magiay;
-    }
-    public String getMaNV()
-    {
-        return manv;
-    }
-    public void setMaNV(String manv)
-    {
-        this.manv=manv;
-    }
-    public Date getNgayIn()
+    public String getNgayIn()
     {
         return ngayin;
     }
-    public void setNgayIn(Date ngayin)
+    public void setNgayIn(String ngayin)
     {
         this.ngayin=ngayin;
     }

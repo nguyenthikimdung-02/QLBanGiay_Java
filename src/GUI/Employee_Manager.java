@@ -509,7 +509,6 @@ public class Employee_Manager extends javax.swing.JFrame {
             LocalDate localDate2 = text_Working_Day.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             String ngayvaolam = localDate2.format(formatter);
             
-            
             nv.setMaNV(manv);
             nv.setTenNV(tennv);
             nv.setNgaySinh(ngaysinh);

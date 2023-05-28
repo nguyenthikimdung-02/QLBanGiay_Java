@@ -5,6 +5,7 @@
 package BLL;
 
 import DAL.DataAccess;
+import DTO.CTHD;
 import DTO.CTKC;
 import DTO.CTPN;
 import DTO.Giay;
@@ -116,9 +117,19 @@ public class ExecuteData {
         String temp = String.format("Update KimDung.CTKC set KICHCO = '%s', MAGIAY = '%s',SOLUONG=%s where KICHCO = '%s'",ct.getSize(),ct.getMaGiay(),ct.getSL(),ct.getSize());
         return DataAccess.ResultOfExecuteSqlUpdate(temp);
     }
+    public static boolean update_SL_KC(CTKC ct,int sl)
+    {
+        String temp = String.format("Update KimDung.CTKC set SOLUONG = SOLUONG - %s where KICHCO = '%s' and MAGIAY = '%s'",sl,ct.getSize(),ct.getMaGiay());
+        return DataAccess.ResultOfExecuteSqlUpdate(temp);
+    }
     public static boolean deleteCTKC(CTKC ct)
     {
         String temp = String.format("delete from KimDung.CTKC where KICHCO = '%s' and MAGIAY = '%s'",ct.getSize(),ct.getMaGiay());
+        return DataAccess.ResultOfExecuteSqlUpdate(temp);
+    }
+    public static boolean delete_SL_KC(CTKC ct,int sl)
+    {
+        String temp = String.format("Update KimDung.CTKC set SOLUONG = SOLUONG + %s where KICHCO = '%s' and MAGIAY = '%s'",sl,ct.getSize(),ct.getMaGiay());
         return DataAccess.ResultOfExecuteSqlUpdate(temp);
     }
     //</editor-fold> 
@@ -136,6 +147,23 @@ public class ExecuteData {
     public static boolean deleteCTPN(CTPN ct)
     {
         String temp = String.format("delete from KimDung.CTPN where MAPN = '%s' and MAGIAY = '%s'",ct.getMaPhieu(),ct.getMaGiay());
+        return DataAccess.ResultOfExecuteSqlUpdate(temp);
+    }
+    //</editor-fold> 
+    // <editor-fold defaultstate="collapsed" desc="CTHD"> 
+    public static boolean insertCTHD(CTHD ct)
+    {
+        String temp = String.format("Insert into KimDung.CTHD (MAHD,MAGIAY,MANV,KICHCO,SL,DONGIA) values ('%s','%s','%s','%s',%s,%s)",ct.getMaHD(),ct.getMaGiay(),ct.getMaNV(),ct.getSize(),ct.getSL(),ct.getDonGia());
+        return DataAccess.ResultOfExecuteSqlUpdate(temp);
+    }
+    public static boolean updateCTHD(CTHD ct)
+    {
+        String temp = String.format("Update KimDung.CTHD set MAHD = '%s', MAGIAY = '%s',MANV = '%s',KICHCO='%s',SL= %s,DONGIA= %s where MAHD = '%s'",ct.getMaHD(),ct.getMaGiay(),ct.getMaNV(),ct.getSize(),ct.getSL(),ct.getDonGia(),ct.getMaHD());
+        return DataAccess.ResultOfExecuteSqlUpdate(temp);
+    }
+    public static boolean deleteCTHD(CTHD ct)
+    {
+        String temp = String.format("delete from KimDung.CTHD where MAHD = '%s' and MAGIAY = '%s' and MANV = '%s' and KICHCO = '%s'",ct.getMaHD(),ct.getMaGiay(),ct.getMaNV(),ct.getSize());
         return DataAccess.ResultOfExecuteSqlUpdate(temp);
     }
     //</editor-fold> 

@@ -4,6 +4,13 @@
  */
 package GUI;
 
+import BLL.ExecuteData;
+import BLL.GetData;
+import DTO.NCC;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author NGUYEN THI KIM DUNG
@@ -13,8 +20,35 @@ public class Supplier extends javax.swing.JFrame {
     /**
      * Creates new form Supplier
      */
-    public Supplier() {
+    public String username;
+    NCC ncc = new NCC();
+    ExecuteData ex = new ExecuteData();
+    GetData dt = new GetData();
+    public Supplier(String username) {
         initComponents();
+        showDataOnTable();
+        this.username=username;
+        this.setLocationRelativeTo(null);
+        text_ID_Search.setText(username);
+    }  
+    private Supplier() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    public void showDataOnTable() {
+        DefaultTableModel model = (DefaultTableModel) tlb_Supplier.getModel();
+        dt = new GetData();
+        ArrayList arr = dt.getDataNCC();
+        String[] tenCot = {"Mã nhà cung cấp", "Tên nhà cung cấp"};
+        model.setDataVector((Object[][]) arr.get(1), tenCot);
+        tlb_Supplier.setRowHeight(50);
+    }
+    public void showDataOnTable_DK() {
+        DefaultTableModel model = (DefaultTableModel) tlb_Supplier.getModel();
+        dt = new GetData();
+        ArrayList arr = dt.getDataNCC(text_ID_Search.getText());
+        String[] tenCot = {"Mã nhà cung cấp", "Tên nhà cung cấp"};
+        model.setDataVector((Object[][]) arr.get(1), tenCot);
+        tlb_Supplier.setRowHeight(50);
     }
 
     /**
@@ -79,11 +113,21 @@ public class Supplier extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tlb_Supplier.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tlb_SupplierMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tlb_Supplier);
 
         jLabel2.setText("Supplier Code");
 
         btn_Search.setText("Search");
+        btn_Search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SearchActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Insert/Update Supplier"));
 
@@ -92,8 +136,18 @@ public class Supplier extends javax.swing.JFrame {
         jLabel4.setText("Name");
 
         btn_Insert.setText("Insert");
+        btn_Insert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_InsertActionPerformed(evt);
+            }
+        });
 
         btn_Update.setText("Update");
+        btn_Update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_UpdateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -138,8 +192,18 @@ public class Supplier extends javax.swing.JFrame {
         );
 
         btn_Return.setText("Back");
+        btn_Return.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ReturnActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Load");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -193,6 +257,82 @@ public class Supplier extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_ReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReturnActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new Menu(username).setVisible(true);
+    }//GEN-LAST:event_btn_ReturnActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        showDataOnTable();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btn_SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SearchActionPerformed
+        // TODO add your handling code here:
+        try{
+            showDataOnTable_DK();
+        } catch(Exception ex) {
+            JOptionPane.showMessageDialog(this, "Bạn nhập sai mã nhà cung cấp hoặc " + ex.getMessage());
+            return;
+        }
+    }//GEN-LAST:event_btn_SearchActionPerformed
+
+    private void btn_InsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_InsertActionPerformed
+        // TODO add your handling code here:
+        try{
+            String mancc = text_ID_Inset_Update.getText();
+            String tenncc = text_Name.getText();
+            ncc.setMaNCC(mancc);
+            ncc.setTenNCC(tenncc);           
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn thông tin đầy đủ hoặc " + ex.getMessage());
+            return;
+        }
+        if(ExecuteData.insertNCC(ncc))
+        {
+            JOptionPane.showMessageDialog(this, "Thêm Thành Công");
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Thêm thất bại");
+        }
+    }//GEN-LAST:event_btn_InsertActionPerformed
+
+    private void btn_UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_UpdateActionPerformed
+        // TODO add your handling code here:
+        try{
+            String mancc = text_ID_Inset_Update.getText();
+            String tenncc = text_Name.getText();
+            ncc.setMaNCC(mancc);
+            ncc.setTenNCC(tenncc);           
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn thông tin đầy đủ hoặc " + ex.getMessage());
+            return;
+        }
+        if(ExecuteData.updateNCC(ncc))
+        {
+            JOptionPane.showMessageDialog(this, "Sửa Thành Công");
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Sửa thất bại");
+        }
+    }//GEN-LAST:event_btn_UpdateActionPerformed
+
+    private void tlb_SupplierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tlb_SupplierMouseClicked
+        // TODO add your handling code here:
+        int row = tlb_Supplier.getSelectedRow();
+        if (row != -1) {
+            text_ID_Inset_Update.setText(tlb_Supplier.getValueAt(row, 0).toString());
+            text_Name.setText(tlb_Supplier.getValueAt(row, 1).toString());            
+        } else {
+            JOptionPane.showMessageDialog(null, "Bạn chưa chọn dòng nào!!!");
+        }
+    }//GEN-LAST:event_tlb_SupplierMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -222,6 +362,7 @@ public class Supplier extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Supplier().setVisible(true);
             }

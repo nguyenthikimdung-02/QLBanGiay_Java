@@ -7,8 +7,11 @@ package GUI;
 import BLL.ExecuteData;
 import BLL.GetData;
 import DTO.CTHD;
+import DTO.CTKC;
 import DTO.Giay;
+import java.awt.event.ItemEvent;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,23 +28,43 @@ public class Selling_Shoes extends javax.swing.JFrame {
     CTHD ct = new CTHD();
     ExecuteData ex = new ExecuteData();
     GetData dt = new GetData();
+    private double tongtien=0;
     public Selling_Shoes(String username) {
         initComponents();
-        showDataOnTable();
+        showDataShoeOnTable();
+        showDataPayOnTable();
+        Object[][] info = dt.getAllSize();
+        int i = 0;
+        while(i < info.length){
+            cb_Size.addItem((String) info[i][0]);
+            i++;
+        }
+        Object[][] manv = dt.getMaNV(username);
+        text_Code_Employee.setText((String) manv[0][0]);
         this.username=username;
         this.setLocationRelativeTo(null);
+        text_Staff.setText(username);
+        
     }
 
     private Selling_Shoes() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    public void showDataOnTable() {
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+    public void showDataShoeOnTable() {
+        DefaultTableModel model = (DefaultTableModel) tbl_All_Shoe.getModel();
         dt = new GetData();
         ArrayList arr = dt.getDataGiay();
         String[] tenCot = {"Mã Giày", "Tên Giày","Giá Bán","Nhà Sản Xuất"};
         model.setDataVector((Object[][]) arr.get(1), tenCot);
-        jTable1.setRowHeight(50);
+        tbl_All_Shoe.setRowHeight(50);
+    }
+    public void showDataPayOnTable() {
+        DefaultTableModel model = (DefaultTableModel) tbl_Bill.getModel();
+        dt = new GetData();
+        ArrayList arr = dt.getDataCTHD_DK(mahd);
+        String[] tenCot = {"Mã Hóa Đơn", "Mã Giày","Mã Nhân Viên","Kích Cỡ","Số lượng","Giá Bán"};
+        model.setDataVector((Object[][]) arr.get(1), tenCot);
+        tbl_Bill.setRowHeight(50);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,30 +76,32 @@ public class Selling_Shoes extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        text_Staff = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbl_All_Shoe = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tbl_Bill = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        text_Quantity = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        text_Code_Bill = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        text_Code_Employee = new javax.swing.JTextField();
+        btn_Delete = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        jTextField6 = new javax.swing.JTextField();
+        text_Total = new javax.swing.JTextField();
+        btn_Insert = new javax.swing.JButton();
+        cb_Size = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setText("Staff's are using");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_All_Shoe.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -87,9 +112,14 @@ public class Selling_Shoes extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tbl_All_Shoe.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_All_ShoeMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tbl_All_Shoe);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_Bill.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -100,7 +130,7 @@ public class Selling_Shoes extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tbl_Bill);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Size");
@@ -114,14 +144,40 @@ public class Selling_Shoes extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel5.setText("Employee Code");
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton1.setText("Delete");
+        btn_Delete.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btn_Delete.setText("Delete");
+        btn_Delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_DeleteActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel6.setText("Total Money");
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton2.setText("Pay");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        btn_Insert.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btn_Insert.setText("Insert");
+        btn_Insert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_InsertActionPerformed(evt);
+            }
+        });
+
+        cb_Size.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cb_SizeItemStateChanged(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -134,10 +190,10 @@ public class Selling_Shoes extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(43, 43, 43)
-                        .addComponent(jTextField1)))
+                        .addComponent(text_Staff)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
+                        .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -145,26 +201,34 @@ public class Selling_Shoes extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(30, 30, 30)
-                                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(45, 45, 45)
+                                        .addComponent(cb_Size, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(44, 44, 44)
                                         .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton1))
+                                        .addComponent(text_Quantity, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(0, 12, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(btn_Delete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(btn_Insert, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(text_Code_Bill, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(102, 102, 102)
-                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(text_Code_Employee, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(41, 41, 41)
-                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(text_Total, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -177,9 +241,9 @@ public class Selling_Shoes extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(text_Staff, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel5)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(text_Code_Employee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -189,24 +253,28 @@ public class Selling_Shoes extends javax.swing.JFrame {
                         .addGap(16, 16, 16)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(text_Code_Bill, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel1)
+                                .addComponent(jLabel3)
+                                .addComponent(text_Quantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel7))
+                            .addComponent(cb_Size, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(68, 68, 68)
-                                .addComponent(jButton1)))
-                        .addGap(18, 18, 18)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btn_Insert)
+                                .addGap(74, 74, 74)
+                                .addComponent(btn_Delete)
+                                .addGap(154, 154, 154)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(text_Total, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2)
                         .addGap(66, 66, 66))))
@@ -214,6 +282,147 @@ public class Selling_Shoes extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DeleteActionPerformed
+        // TODO add your handling code here:
+        try{
+            int row = tbl_Bill.getSelectedRow();
+            String rowDele = "";
+            String rowGiay = "";
+            String rownv = "";
+            String rowsize = "";
+            if (row != -1) {
+                rowDele = tbl_Bill.getValueAt(row, 0).toString();
+                rowGiay = tbl_Bill.getValueAt(row, 1).toString();
+                rownv = tbl_Bill.getValueAt(row, 2).toString();
+                rowsize = tbl_Bill.getValueAt(row, 3).toString();
+                ct.setMaHD(rowDele);
+                ct.setMaGiay(rowGiay);
+                ct.setMaNV(rownv);
+                ct.setSize(size);
+                ctkc.setSize(size);
+                ctkc.setMaGiay(magiay);
+                ctkc.setSL(sl);
+            } else {
+                JOptionPane.showMessageDialog(null, "Bạn chưa chọn dòng nào!!!");
+            }
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn dòng nào hoặc " + ex.getMessage());
+            return;
+        }
+        if(ExecuteData.deleteCTHD(ct)&&ExecuteData.delete_SL_KC(ctkc, Integer.parseInt(sl)))
+        {
+            JOptionPane.showMessageDialog(this, "Xóa Thành Công");
+            showDataPayOnTable();
+            Object[][] allsize = dt.getTongTien(mahd);
+            text_Total.setText(allsize[0][0].toString());
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Xóa thất bại");
+        }
+    }//GEN-LAST:event_btn_DeleteActionPerformed
+
+    private void tbl_All_ShoeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_All_ShoeMouseClicked
+        // TODO add your handling code here:
+        int row = tbl_All_Shoe.getSelectedRow();
+        if (row != -1) {
+            magiay = tbl_All_Shoe.getValueAt(row, 0).toString();
+            gia = tbl_All_Shoe.getValueAt(row, 2).toString();
+            try{
+            Object[][] allsize = dt.getTotalSize(size,magiay);
+            jLabel7.setText((String) allsize[0][0].toString());
+            }
+            catch(Exception ex)
+            {
+                jLabel7.setText("0");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Bạn chưa chọn dòng nào!!!");
+        }
+    }//GEN-LAST:event_tbl_All_ShoeMouseClicked
+    private String size = "";
+    private String gia = "";
+    private String magiay="";
+    private String mahd = "";
+    private String sl = "";
+    CTKC ctkc = new CTKC();
+    private void btn_InsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_InsertActionPerformed
+        // TODO add your handling code here:
+        try{
+            mahd = text_Code_Bill.getText();
+            String manv = text_Code_Employee.getText();
+            sl = text_Quantity.getText();
+            ct.setMaHD(mahd);
+            ct.setMaGiay(magiay);
+            ct.setMaNV(manv);
+            ct.setSize(size);
+            ct.setSL(sl);
+            ct.setDonGia(gia);
+            ctkc.setSize(size);
+            ctkc.setMaGiay(magiay);
+            ctkc.setSL(sl);
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn thông tin đầy đủ hoặc " + ex.getMessage());
+            return;
+        }
+        if(ExecuteData.insertCTHD(ct) && Integer.parseInt(sl)<Integer.parseInt(jLabel7.getText())
+                &&ExecuteData.update_SL_KC(ctkc, Integer.parseInt(sl)))
+        {
+            JOptionPane.showMessageDialog(this, "Thêm Thành Công");
+            showDataPayOnTable();
+            Object[][] allsize = dt.getTongTien(mahd);
+            text_Total.setText(allsize[0][0].toString());
+            
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Thêm thất bại do size bạn đang đặt không còn đủ số lượng trong kho, bạn thông cảm đặt size khác!");
+        }
+    }//GEN-LAST:event_btn_InsertActionPerformed
+    private void showTotalBill()
+    {
+        
+    }
+    private void cb_SizeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_SizeItemStateChanged
+        // TODO add your handling code here:
+        if(evt.getStateChange()== ItemEvent.SELECTED){
+            size = cb_Size.getSelectedItem().toString();
+            try{
+            Object[][] allsize = dt.getTotalSize(size,magiay);
+            jLabel7.setText((String) allsize[0][0].toString());
+            }
+            catch(Exception ex)
+            {
+                jLabel7.setText("0");
+            }
+        }
+        else
+            size="";
+        
+    }//GEN-LAST:event_cb_SizeItemStateChanged
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        try{
+            
+            
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn thông tin đầy đủ hoặc " + ex.getMessage());
+            return;
+        }
+        if(ExecuteData.updateGiay(giay))
+        {
+            JOptionPane.showMessageDialog(this, "Cập Nhật Thành Công");
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Cập nhật thất bại");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -252,7 +461,9 @@ public class Selling_Shoes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btn_Delete;
+    private javax.swing.JButton btn_Insert;
+    private javax.swing.JComboBox<String> cb_Size;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -260,15 +471,15 @@ public class Selling_Shoes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTable tbl_All_Shoe;
+    private javax.swing.JTable tbl_Bill;
+    private javax.swing.JTextField text_Code_Bill;
+    private javax.swing.JTextField text_Code_Employee;
+    private javax.swing.JTextField text_Quantity;
+    private javax.swing.JTextField text_Staff;
+    private javax.swing.JTextField text_Total;
     // End of variables declaration//GEN-END:variables
 }

@@ -14,17 +14,19 @@ public class CTHD {
     private String mahd;
     private String magiay;
     private String manv;
-    private int sl;
-    private double dongia;
+    private String size;
+    private String sl;
+    private String dongia;
     public CTHD()
     {
 
     }
-    public CTHD(String mahd, String magiay, String manv, int sl, double dongia)
+    public CTHD(String mahd, String magiay, String manv,String size, String sl, String dongia)
     {
         this.mahd = mahd;
         this.magiay = magiay;
         this.manv = manv;
+        this.size=size;
         this.sl=sl;
         this.dongia=dongia;
     }
@@ -52,19 +54,27 @@ public class CTHD {
     {
         this.manv=manv;
     }
-    public int getSL()
+    public String getSize()
+    {
+        return size;
+    }
+    public void setSize(String size)
+    {
+        this.size=size;
+    }
+    public String getSL()
     {
         return sl;
     }
-    public void setSL(int sl)
+    public void setSL(String sl)
     {
         this.sl=sl;
     }
-    public double getDonGia()
+    public String getDonGia()
     {
         return dongia;
     }
-    public void setDonGia(double dongia)
+    public void setDonGia(String dongia)
     {
         this.dongia=dongia;
     }
