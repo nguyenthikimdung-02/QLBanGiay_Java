@@ -71,7 +71,6 @@ public class Customer_Management extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         text_Customer_Search = new javax.swing.JTextField();
         btn_Search = new javax.swing.JButton();
-        btn_Load = new javax.swing.JButton();
         btn_Return = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         text_Staff = new javax.swing.JTextField();
@@ -199,13 +198,6 @@ public class Customer_Management extends javax.swing.JFrame {
             }
         });
 
-        btn_Load.setText("Load");
-        btn_Load.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_LoadActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -220,9 +212,7 @@ public class Customer_Management extends javax.swing.JFrame {
                 .addGap(65, 65, 65))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btn_Load)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -234,9 +224,8 @@ public class Customer_Management extends javax.swing.JFrame {
                     .addComponent(text_Customer_Search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_Search))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11)
-                .addComponent(btn_Load))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
         );
 
         btn_Return.setText("Back");
@@ -248,6 +237,8 @@ public class Customer_Management extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel7.setText("Staff's are using");
+
+        text_Staff.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -320,17 +311,13 @@ public class Customer_Management extends javax.swing.JFrame {
         if(ExecuteData.insertKH(kh))
         {
             JOptionPane.showMessageDialog(this, "Thêm Thành Công");
+            showDataOnTable();
         }
         else {
             JOptionPane.showMessageDialog(this, "Thêm thất bại");
         }
         
     }//GEN-LAST:event_btn_InsertActionPerformed
-
-    private void btn_LoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LoadActionPerformed
-        // TODO add your handling code here:
-        showDataOnTable();
-    }//GEN-LAST:event_btn_LoadActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
@@ -417,7 +404,6 @@ public class Customer_Management extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Insert;
-    private javax.swing.JButton btn_Load;
     private javax.swing.JButton btn_Return;
     private javax.swing.JButton btn_Search;
     private javax.swing.JLabel jLabel1;

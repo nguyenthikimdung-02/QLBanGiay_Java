@@ -23,7 +23,7 @@ public class GetData {
         return da.QueryTable();
     }
     public ArrayList getDataKhachHang(String ma){
-        DataAccess da = new DataAccess( String.format("select * from KHACHHANG where MAKH = '%s'", ma));
+        DataAccess da = new DataAccess( String.format("select * from KimDung.KHACHHANG where TENKH = '%s'", ma));
         return da.QueryTable();
     }
     public ArrayList getDataNV() {
@@ -31,7 +31,7 @@ public class GetData {
         return da.QueryTable();
     }
     public ArrayList getDataNV(String ma) {
-        DataAccess da = new DataAccess(String.format("SELECT * FROM KimDung.NHANVIEN where MANV = '%s'",ma));
+        DataAccess da = new DataAccess(String.format("SELECT * FROM KimDung.NHANVIEN where TENNV = '%s'",ma));
         return da.QueryTable();
     }
     public ArrayList getDataCTPN() {
@@ -58,7 +58,7 @@ public class GetData {
         return da.QueryTable();
     }
     public ArrayList getDataNCC(String ma){
-        DataAccess da = new DataAccess(String.format("select * from KimDung.NCC where MANCC='%s'", ma ));
+        DataAccess da = new DataAccess(String.format("select * from KimDung.NCC where TENNCC='%s'", ma ));
         return da.QueryTable();
     }
     public ArrayList getDataCTHD()
