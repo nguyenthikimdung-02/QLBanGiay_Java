@@ -37,7 +37,8 @@ public class Customer_Management extends javax.swing.JFrame {
         showDataOnTable();
         this.username=username;
         this.setLocationRelativeTo(null);
-        text_Staff.setText(username);
+        Object[][] tennv = dt.getTenNV(username);
+        text_Staff.setText((String) tennv[0][0]);
     }
 
     private Customer_Management() {
@@ -238,6 +239,7 @@ public class Customer_Management extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel7.setText("Staff's are using");
 
+        text_Staff.setBackground(new java.awt.Color(0, 51, 102));
         text_Staff.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

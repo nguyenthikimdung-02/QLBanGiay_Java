@@ -36,7 +36,8 @@ public class Employee_Manager extends javax.swing.JFrame {
         showDataOnTable();
         this.username=username;
         this.setLocationRelativeTo(null);
-        jLabel2.setText(jLabel2.getText()+username);
+        Object[][] tennv = dt.getTenNV(username);
+        jLabel2.setText(jLabel2.getText()+(String) tennv[0][0]);
         
     }
 
@@ -82,7 +83,6 @@ public class Employee_Manager extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -285,19 +285,12 @@ public class Employee_Manager extends javax.swing.JFrame {
                     .addContainerGap(14, Short.MAX_VALUE)))
         );
 
-        jLabel3.setText("Identifier");
+        jLabel3.setText("Name");
 
         jButton5.setText("Search");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
-            }
-        });
-
-        jButton6.setText("Load");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
             }
         });
 
@@ -336,9 +329,7 @@ public class Employee_Manager extends javax.swing.JFrame {
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(146, 146, 146)
                 .addComponent(jButton5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton6)
-                .addGap(18, 18, 18))
+                .addGap(18, 208, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -348,8 +339,7 @@ public class Employee_Manager extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5)
-                    .addComponent(jButton6))
+                    .addComponent(jButton5))
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -406,6 +396,7 @@ public class Employee_Manager extends javax.swing.JFrame {
         if(ExecuteData.insertNV(nv))
         {
             JOptionPane.showMessageDialog(this, "Thêm Thành Công");
+            showDataOnTable();
         }
         else {
             JOptionPane.showMessageDialog(this, "Thêm thất bại");
@@ -428,11 +419,6 @@ public class Employee_Manager extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-        showDataOnTable();
-    }//GEN-LAST:event_jButton6ActionPerformed
-
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         try{
@@ -454,6 +440,7 @@ public class Employee_Manager extends javax.swing.JFrame {
         if(ExecuteData.deleteNV(nv))
         {
             JOptionPane.showMessageDialog(this, "Xóa Thành Công");
+            showDataOnTable();
         }
         else {
             JOptionPane.showMessageDialog(this, "Xóa thất bại");
@@ -526,6 +513,7 @@ public class Employee_Manager extends javax.swing.JFrame {
         if(ExecuteData.updateNV(nv))
         {
             JOptionPane.showMessageDialog(this, "Cập Nhập Thành Công");
+            showDataOnTable();
         }
         else {
             JOptionPane.showMessageDialog(this, "Cập nhật thất bại");
@@ -589,7 +577,6 @@ public class Employee_Manager extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

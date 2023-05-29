@@ -42,6 +42,8 @@ public class Product_Management extends javax.swing.JFrame {
             i++;
         }
         this.username=username;
+        Object[][] tennv = dt.getTenNV(username);
+        jLabel5.setText((String) tennv[0][0]);
         this.setLocationRelativeTo(null);
     }
 
@@ -83,7 +85,7 @@ public class Product_Management extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_All = new javax.swing.JTable();
         jButton4 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -236,13 +238,7 @@ public class Product_Management extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton1.setText("Load");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -256,10 +252,10 @@ public class Product_Management extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(20, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(157, 157, 157)
-                .addComponent(jButton1)
+                .addGap(64, 64, 64)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton4)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36))
         );
         layout.setVerticalGroup(
@@ -271,9 +267,9 @@ public class Product_Management extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
-                    .addComponent(jButton1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 30, Short.MAX_VALUE))
         );
 
@@ -285,11 +281,6 @@ public class Product_Management extends javax.swing.JFrame {
         this.setVisible(false);
         new Menu(username).setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        showDataOnTable();
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void tbl_AllMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_AllMouseClicked
         // TODO add your handling code here:
@@ -333,6 +324,7 @@ public class Product_Management extends javax.swing.JFrame {
         if(ExecuteData.deleteGiay(giay))
         {
             JOptionPane.showMessageDialog(this, "Xóa Thành Công");
+            showDataOnTable();
         }
         else {
             JOptionPane.showMessageDialog(this, "Xóa thất bại");
@@ -359,6 +351,7 @@ public class Product_Management extends javax.swing.JFrame {
         if(ExecuteData.updateGiay(giay))
         {
             JOptionPane.showMessageDialog(this, "Cập Nhật Thành Công");
+            showDataOnTable();
         }
         else {
             JOptionPane.showMessageDialog(this, "Cập nhật thất bại");
@@ -385,6 +378,7 @@ public class Product_Management extends javax.swing.JFrame {
         if(ExecuteData.insertGiay(giay))
         {
             JOptionPane.showMessageDialog(this, "Thêm Thành Công");
+            showDataOnTable();
         }
         else {
             JOptionPane.showMessageDialog(this, "Thêm thất bại");
@@ -433,12 +427,12 @@ public class Product_Management extends javax.swing.JFrame {
     private javax.swing.JButton btn_Insert;
     private javax.swing.JButton btn_Update;
     private javax.swing.JComboBox<String> cb_Manufacturer;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

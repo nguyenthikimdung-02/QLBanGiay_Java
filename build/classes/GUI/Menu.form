@@ -133,6 +133,12 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="textUserName">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="66" green="33" red="0" type="rgb"/>
+            </Property>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btn_logout">
           <Properties>
@@ -246,6 +252,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Supplier"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_SupplierActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_Manufacturer">
           <Properties>
@@ -260,6 +269,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Manufacturer"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ManufacturerActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

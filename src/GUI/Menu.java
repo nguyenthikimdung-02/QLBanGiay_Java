@@ -4,6 +4,7 @@
  */
 package GUI;
 
+import BLL.GetData;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
 
@@ -17,13 +18,15 @@ public class Menu extends javax.swing.JFrame {
      * Creates new form Menu
      */
     public String user;
+    GetData dt = new GetData();
     public static Connection conn = null; 
     public static Login loginForm = null;
     public Menu(String user) {
         initComponents();
         this.user=user;
         this.setLocationRelativeTo(null);
-        textUserName.setText(user);
+        Object[][] tennv = dt.getTenNV(user);
+        textUserName.setText((String) tennv[0][0]);
     }
 
     private Menu() {
@@ -66,6 +69,9 @@ public class Menu extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 255, 0));
         jLabel3.setText("Staff's Name");
+
+        textUserName.setBackground(new java.awt.Color(0, 51, 102));
+        textUserName.setEnabled(false);
 
         btn_logout.setBackground(new java.awt.Color(242, 242, 242));
         btn_logout.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -130,11 +136,21 @@ public class Menu extends javax.swing.JFrame {
         btn_Supplier.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_Supplier.setForeground(new java.awt.Color(255, 255, 255));
         btn_Supplier.setText("Supplier");
+        btn_Supplier.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SupplierActionPerformed(evt);
+            }
+        });
 
         btn_Manufacturer.setBackground(new java.awt.Color(51, 51, 51));
         btn_Manufacturer.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_Manufacturer.setForeground(new java.awt.Color(255, 255, 255));
         btn_Manufacturer.setText("Manufacturer");
+        btn_Manufacturer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ManufacturerActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -257,6 +273,18 @@ public class Menu extends javax.swing.JFrame {
         this.setVisible(false);
         new Selling_Shoes(user).setVisible(true);
     }//GEN-LAST:event_btn_ShoesActionPerformed
+
+    private void btn_ManufacturerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ManufacturerActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new Manufacturer(user).setVisible(true);
+    }//GEN-LAST:event_btn_ManufacturerActionPerformed
+
+    private void btn_SupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SupplierActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new Supplier(user).setVisible(true);
+    }//GEN-LAST:event_btn_SupplierActionPerformed
 
     /**
      * @param args the command line arguments

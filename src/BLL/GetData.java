@@ -76,6 +76,11 @@ public class GetData {
                 String.format("SELECT MANV from KimDung.NHANVIEN where TENID = '%s'",ma));
         return da.QueryContentTable();
     }
+    public Object[][] getTenNV(String ma) {
+        DataAccess da = new DataAccess(
+                String.format("SELECT TENNV from KimDung.NHANVIEN where TENID = '%s'",ma));
+        return da.QueryContentTable();
+    }
     public Object[][] getTongTien(String ma) {
         DataAccess da = new DataAccess(
                 String.format("select sum(SL*DONGIA) as tong from KimDung.CTHD where MAHD='%s'",ma));

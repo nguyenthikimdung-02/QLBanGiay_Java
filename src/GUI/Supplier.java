@@ -29,6 +29,8 @@ public class Supplier extends javax.swing.JFrame {
         showDataOnTable();
         this.username=username;
         this.setLocationRelativeTo(null);
+        Object[][] tennv = dt.getTenNV(username);
+        jLabel5.setText((String) tennv[0][0]);
         text_ID_Search.setText(username);
     }  
     private Supplier() {
@@ -75,7 +77,7 @@ public class Supplier extends javax.swing.JFrame {
         text_Name = new javax.swing.JTextField();
         btn_Update = new javax.swing.JButton();
         btn_Return = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -198,13 +200,6 @@ public class Supplier extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Load");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -227,10 +222,10 @@ public class Supplier extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(193, 193, 193)
-                        .addComponent(jButton1)
+                        .addGap(41, 41, 41)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_Return, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btn_Return, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -249,9 +244,9 @@ public class Supplier extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btn_Return, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(23, Short.MAX_VALUE))
+                    .addComponent(btn_Return, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -262,11 +257,6 @@ public class Supplier extends javax.swing.JFrame {
         this.setVisible(false);
         new Menu(username).setVisible(true);
     }//GEN-LAST:event_btn_ReturnActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        showDataOnTable();
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btn_SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SearchActionPerformed
         // TODO add your handling code here:
@@ -294,6 +284,7 @@ public class Supplier extends javax.swing.JFrame {
         if(ExecuteData.insertNCC(ncc))
         {
             JOptionPane.showMessageDialog(this, "Thêm Thành Công");
+            showDataOnTable();
         }
         else {
             JOptionPane.showMessageDialog(this, "Thêm thất bại");
@@ -316,6 +307,7 @@ public class Supplier extends javax.swing.JFrame {
         if(ExecuteData.updateNCC(ncc))
         {
             JOptionPane.showMessageDialog(this, "Sửa Thành Công");
+            showDataOnTable();
         }
         else {
             JOptionPane.showMessageDialog(this, "Sửa thất bại");
@@ -374,11 +366,11 @@ public class Supplier extends javax.swing.JFrame {
     private javax.swing.JButton btn_Return;
     private javax.swing.JButton btn_Search;
     private javax.swing.JButton btn_Update;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

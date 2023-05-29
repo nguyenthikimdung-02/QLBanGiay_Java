@@ -6,6 +6,7 @@ package GUI;
 
 import BLL.ExecuteData;
 import BLL.GetData;
+import DTO.CTKC;
 import DTO.CTPN;
 import DTO.NhanVien;
 import java.awt.event.ItemEvent;
@@ -31,6 +32,7 @@ public class Import_Goods extends javax.swing.JFrame {
      */
     public String username;
     CTPN ct = new CTPN();
+    CTKC kc = new CTKC();
     ExecuteData ex = new ExecuteData();
     GetData dt = new GetData();
     public Import_Goods(String username) {
@@ -38,7 +40,8 @@ public class Import_Goods extends javax.swing.JFrame {
         showDataOnTable();
         this.username=username;
         this.setLocationRelativeTo(null);
-        text_Staff.setText(username);
+        Object[][] tennv = dt.getTenNV(username);
+        text_Staff.setText((String) tennv[0][0]);
         Object[][] info = dt.getAllSize();
         int i = 0;
         while(i < info.length){
@@ -99,7 +102,6 @@ public class Import_Goods extends javax.swing.JFrame {
         text_Price = new javax.swing.JTextField();
         cb_Manufacturer = new javax.swing.JComboBox<>();
         cb_Supplier = new javax.swing.JComboBox<>();
-        btn_Load_Supplier = new javax.swing.JButton();
         btn_Return = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         text_Staff = new javax.swing.JTextField();
@@ -206,20 +208,13 @@ public class Import_Goods extends javax.swing.JFrame {
             }
         });
 
-        btn_Load_Supplier.setText("Load");
-        btn_Load_Supplier.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_Load_SupplierActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -229,7 +224,7 @@ public class Import_Goods extends javax.swing.JFrame {
                             .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(29, 29, 29)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(textDate, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
@@ -238,10 +233,7 @@ public class Import_Goods extends javax.swing.JFrame {
                             .addComponent(text_Price)
                             .addComponent(cb_Manufacturer, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cb_Supplier, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(btn_Load_Supplier)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_Insert)))
+                    .addComponent(btn_Insert))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -272,9 +264,7 @@ public class Import_Goods extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(cb_Supplier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 29, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_Insert)
-                    .addComponent(btn_Load_Supplier))
+                .addComponent(btn_Insert)
                 .addGap(11, 11, 11))
         );
 
@@ -287,6 +277,9 @@ public class Import_Goods extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Staff's are using");
+
+        text_Staff.setBackground(new java.awt.Color(0, 0, 102));
+        text_Staff.setEnabled(false);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Size"));
 
@@ -319,12 +312,13 @@ public class Import_Goods extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(cb_Size, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel6)
-                        .addComponent(text_Quantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(text_Quantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel10)
+                        .addComponent(cb_Size, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -383,11 +377,6 @@ public class Import_Goods extends javax.swing.JFrame {
         new Menu(username).setVisible(true);
     }//GEN-LAST:event_btn_ReturnActionPerformed
 
-    private void btn_Load_SupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Load_SupplierActionPerformed
-        // TODO add your handling code here:
-        showDataOnTable();
-    }//GEN-LAST:event_btn_Load_SupplierActionPerformed
-
     private void tbl_All_EntryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_All_EntryMouseClicked
         // TODO add your handling code here:
         int row = tbl_All_Entry.getSelectedRow();
@@ -410,7 +399,7 @@ public class Import_Goods extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Bạn chưa chọn dòng nào!!!");
         }
     }//GEN-LAST:event_tbl_All_EntryMouseClicked
-
+    private String sl ="";
     private void btn_InsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_InsertActionPerformed
         // TODO add your handling code here:
         try{
@@ -419,7 +408,7 @@ public class Import_Goods extends javax.swing.JFrame {
             LocalDate localDate = textDate.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yy");
             String ngaynhap = localDate.format(formatter);
-            String sl = text_Quantity.getText();
+            sl = text_Quantity.getText();
             String gianhap = text_Price.getText();
             
             ct.setMaPhieu(mapn);
@@ -430,6 +419,9 @@ public class Import_Goods extends javax.swing.JFrame {
             ct.setGiaNhap(gianhap);
             ct.setMaNSX(manufacturer);
             ct.setMaNCC(Supplier);
+            kc.setSize(size);
+            kc.setMaGiay(magiay);
+            kc.setSL(sl);
             
             
         }
@@ -438,9 +430,10 @@ public class Import_Goods extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Bạn chưa chọn thông tin đầy đủ hoặc " + ex.getMessage());
             return;
         }
-        if(ExecuteData.insertCTPN(ct))
+        if(ExecuteData.insertCTPN(ct)&&ExecuteData.delete_SL_KC(kc, Integer.parseInt(sl)))
         {
             JOptionPane.showMessageDialog(this, "Thêm Thành Công");
+            showDataOnTable();
         }
         else {
             JOptionPane.showMessageDialog(this, "Thêm thất bại");
@@ -510,7 +503,6 @@ public class Import_Goods extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Insert;
-    private javax.swing.JButton btn_Load_Supplier;
     private javax.swing.JButton btn_Return;
     private javax.swing.JComboBox<String> cb_Manufacturer;
     private javax.swing.JComboBox<String> cb_Size;
