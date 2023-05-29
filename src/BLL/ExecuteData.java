@@ -153,12 +153,12 @@ public class ExecuteData {
     // <editor-fold defaultstate="collapsed" desc="CTHD"> 
     public static boolean insertCTHD(CTHD ct)
     {
-        String temp = String.format("Insert into KimDung.CTHD (MAHD,MAGIAY,MANV,KICHCO,SL,DONGIA) values ('%s','%s','%s','%s',%s,%s)",ct.getMaHD(),ct.getMaGiay(),ct.getMaNV(),ct.getSize(),ct.getSL(),ct.getDonGia());
+        String temp = String.format("Insert into KimDung.CTHD (MAHD,MAGIAY,MANV,MAKH,KICHCO,SL,DONGIA) values ('%s','%s','%s'.'%s','%s',%s,%s)",ct.getMaHD(),ct.getMaGiay(),ct.getMaNV(),ct.getMaKH(),ct.getSize(),ct.getSL(),ct.getDonGia());
         return DataAccess.ResultOfExecuteSqlUpdate(temp);
     }
     public static boolean updateCTHD(CTHD ct)
     {
-        String temp = String.format("Update KimDung.CTHD set MAHD = '%s', MAGIAY = '%s',MANV = '%s',KICHCO='%s',SL= %s,DONGIA= %s where MAHD = '%s'",ct.getMaHD(),ct.getMaGiay(),ct.getMaNV(),ct.getSize(),ct.getSL(),ct.getDonGia(),ct.getMaHD());
+        String temp = String.format("Update KimDung.CTHD set MAHD = '%s', MAGIAY = '%s',MANV = '%s',MAKH='%s',KICHCO='%s',SL= %s,DONGIA= %s where MAHD = '%s'",ct.getMaHD(),ct.getMaGiay(),ct.getMaNV(),ct.getMaKH(),ct.getSize(),ct.getSL(),ct.getDonGia(),ct.getMaHD());
         return DataAccess.ResultOfExecuteSqlUpdate(temp);
     }
     public static boolean deleteCTHD(CTHD ct)

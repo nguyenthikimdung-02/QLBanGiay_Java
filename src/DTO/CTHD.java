@@ -14,6 +14,7 @@ public class CTHD {
     private String mahd;
     private String magiay;
     private String manv;
+    private String makh;
     private String size;
     private String sl;
     private String dongia;
@@ -21,11 +22,12 @@ public class CTHD {
     {
 
     }
-    public CTHD(String mahd, String magiay, String manv,String size, String sl, String dongia)
+    public CTHD(String mahd, String magiay, String manv,String makh,String size, String sl, String dongia)
     {
         this.mahd = mahd;
         this.magiay = magiay;
         this.manv = manv;
+        this.makh=makh;
         this.size=size;
         this.sl=sl;
         this.dongia=dongia;
@@ -53,6 +55,14 @@ public class CTHD {
     public void setMaNV(String manv)
     {
         this.manv=manv;
+    }
+    public String getMaKH()
+    {
+        return makh;
+    }
+    public void setMaKH(String makh)
+    {
+        this.makh=makh;
     }
     public String getSize()
     {
