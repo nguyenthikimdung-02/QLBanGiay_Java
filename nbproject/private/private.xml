@@ -4,11 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/E:/GITHUB/QLBanGiay_Java/src/BLL/ExecuteData.java</file>
-            <file>file:/E:/GITHUB/QLBanGiay_Java/src/GUI/Manufacturer.java</file>
+            <file>file:/E:/GITHUB/QLBanGiay_Java/src/GUI/Login.java</file>
             <file>file:/E:/GITHUB/QLBanGiay_Java/src/GUI/Employee_Manager.java</file>
             <file>file:/E:/GITHUB/QLBanGiay_Java/src/BLL/GetData.java</file>
+            <file>file:/E:/GITHUB/QLBanGiay_Java/src/DAL/DataConnect.java</file>
             <file>file:/E:/GITHUB/QLBanGiay_Java/src/GUI/Selling_Shoes.java</file>
-            <file>file:/E:/GITHUB/QLBanGiay_Java/src/DTO/CTHD.java</file>
             <file>file:/E:/GITHUB/QLBanGiay_Java/src/GUI/Customer_Management.java</file>
             <file>file:/E:/GITHUB/QLBanGiay_Java/src/GUI/Supplier.java</file>
             <file>file:/E:/GITHUB/QLBanGiay_Java/src/DAL/DataAccess.java</file>
