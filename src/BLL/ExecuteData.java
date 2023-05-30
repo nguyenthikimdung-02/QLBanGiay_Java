@@ -153,7 +153,12 @@ public class ExecuteData {
     // <editor-fold defaultstate="collapsed" desc="CTHD"> 
     public static boolean insertCTHD(CTHD ct)
     {
-        String temp = String.format("Insert into KimDung.CTHD (MAHD,MAGIAY,MANV,MAKH,KICHCO,SL,DONGIA) values ('%s','%s','%s'.'%s','%s',%s,%s)",ct.getMaHD(),ct.getMaGiay(),ct.getMaNV(),ct.getMaKH(),ct.getSize(),ct.getSL(),ct.getDonGia());
+        String temp = String.format("Insert into KimDung.CTHD (MAHD,MAGIAY,MANV,MAKH,KICHCO,SL,DONGIA) values ('%s','%s','%s','%s','%s',%s,%s)",ct.getMaHD(),ct.getMaGiay(),ct.getMaNV(),ct.getMaKH(),ct.getSize(),ct.getSL(),ct.getDonGia());
+        return DataAccess.ResultOfExecuteSqlUpdate(temp);
+    }
+    public static boolean insertHD_DK()
+    {
+        String temp ="insert into KimDung.HOADON values(TO_CHAR(tang_MAHD.nextval),sysdate)";
         return DataAccess.ResultOfExecuteSqlUpdate(temp);
     }
     public static boolean updateCTHD(CTHD ct)

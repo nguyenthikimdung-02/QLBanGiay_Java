@@ -53,6 +53,16 @@ public class GetData {
                 "SELECT KichCo from KimDung.KichCo");
         return da.QueryContentTable();
     }
+    public Object[][] getAllKH() {
+        DataAccess da = new DataAccess(
+                "SELECT MAKH from KimDung.KHACHHANG");
+        return da.QueryContentTable();
+    }
+    public Object[][] getAllBill() {
+        DataAccess da = new DataAccess(
+                "SELECT MAHD from KimDung.HOADON");
+        return da.QueryContentTable();
+    }
     public ArrayList getDataNCC(){
         DataAccess da = new DataAccess("SELECT * FROM KimDung.NCC");
         return da.QueryTable();
@@ -71,6 +81,11 @@ public class GetData {
         DataAccess da = new DataAccess(String.format("select * from KimDung.CTHD where MAHD='%s'",ma));
         return da.QueryTable();
     }
+    public ArrayList getDataPN(String ma)
+    {
+        DataAccess da = new DataAccess(String.format("select * from KimDung.CTPN where NGAYNHAP ='%s'",ma));
+        return da.QueryTable();
+    }
     public Object[][] getMaNV(String ma) {
         DataAccess da = new DataAccess(
                 String.format("SELECT MANV from KimDung.NHANVIEN where TENID = '%s'",ma));
@@ -81,6 +96,7 @@ public class GetData {
                 String.format("SELECT TENNV from KimDung.NHANVIEN where TENID = '%s'",ma));
         return da.QueryContentTable();
     }
+    
     public Object[][] getTongTien(String ma) {
         DataAccess da = new DataAccess(
                 String.format("select sum(SL*DONGIA) as tong from KimDung.CTHD where MAHD='%s'",ma));

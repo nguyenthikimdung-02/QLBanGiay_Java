@@ -31,7 +31,6 @@ public class Supplier extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         Object[][] tennv = dt.getTenNV(username);
         jLabel5.setText((String) tennv[0][0]);
-        text_ID_Search.setText(username);
     }  
     private Supplier() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
